@@ -79,7 +79,7 @@ function Basic() {
       <Card>
         <SoftBox p={3} mb={1} textAlign="center">
           <SoftTypography variant="h5" fontWeight="medium">
-            Sign in 
+            Sign in
           </SoftTypography>
         </SoftBox>
         <SoftBox pt={2} pb={3} px={3}>
@@ -94,7 +94,7 @@ function Basic() {
               />
               {formik.errors.email ? <div>{formik.errors.email}</div> : null}
             </SoftBox>
-            <SoftBox mb={2}>
+            <SoftBox mb={2} position="relative">
               <SoftInput
                 type="password"
                 placeholder="Password"
@@ -103,27 +103,53 @@ function Basic() {
                 value={formik.values.password}
               />
               {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+              <SoftTypography
+                component={Link}
+                to="/authentication/reset-password"
+                variant="caption"
+                color="dark"
+                fontWeight="bold"
+                textGradient
+                sx={{ position: "absolute", right: 0, bottom: -20 }}
+              >
+                Forgot Password?
+              </SoftTypography>
             </SoftBox>
             <SoftBox mt={4} mb={1}>
               <SoftButton variant="gradient" color="dark" fullWidth type="submit">
                 sign in
               </SoftButton>
             </SoftBox>
-            <SoftBox mt={3} textAlign="center">
-              <SoftTypography variant="button" color="text" fontWeight="regular">
-                Don&apos;t have an account?&nbsp;
-                <SoftTypography
-                  component={Link}
-                  to="/authentication/sign-up/basic"
-                  variant="button"
-                  color="dark"
-                  fontWeight="bold"
-                  textGradient
-                >
-                  Sign up
-                </SoftTypography>
+          </SoftBox>
+          <SoftBox mt={3} textAlign="center">
+            <SoftTypography variant="button" color="text" fontWeight="regular">
+              Don&apos;t have an account?&nbsp;
+              <SoftTypography
+                component={Link}
+                to="/authentication/sign-up/basic"
+                variant="button"
+                color="dark"
+                fontWeight="bold"
+                textGradient
+              >
+                Sign up
               </SoftTypography>
-            </SoftBox>
+            </SoftTypography>
+          </SoftBox>
+          <SoftBox mt={3} textAlign="center">
+            <SoftTypography variant="button" color="text" fontWeight="regular">
+              Want to sign in using OTP?&nbsp;
+              <SoftTypography
+                component={Link}
+                to="/authentication/otp-login"
+                variant="button"
+                color="dark"
+                fontWeight="bold"
+                textGradient
+              >
+                Sign in using OTP
+              </SoftTypography>
+            </SoftTypography>
           </SoftBox>
         </SoftBox>
       </Card>

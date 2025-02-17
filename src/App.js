@@ -53,6 +53,8 @@ import Dashboard from "layouts/dashboards/default/Dashboard";
 
 import { Provider } from "react-redux";
 import store from "store";
+import BasicSign from "layouts/authentication/sign-in/basic";
+import BasicSignup from "layouts/authentication/sign-up/basic";
 
 export default function App() {
   const [controller, dispatch] = useSoftUIController();
@@ -148,11 +150,14 @@ export default function App() {
         )}
         <Routes>
           {getRoutes(dashboardRoutes)}
-          {getRoutes(routes)}
+          {/* {getRoutes(routes)} */}
 
           <Route path="/authentication/sign-up/success" element={<Success />} />
+          <Route path="/authentication/sign-in/" element={<BasicSign />} />
+
+          <Route path="/authentication/sign-up/" element={<BasicSignup />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="*" element={<Navigate to="/authentication/sign-in/basic" />} />
+          <Route path="*" element={<Navigate to="/authentication/sign-in/" />} />
         </Routes>
       </ThemeProvider>
     </Provider>

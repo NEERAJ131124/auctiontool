@@ -1,5 +1,7 @@
 import React from "react";
 import { Icon } from "@mui/material";
+
+// Soft UI Dashboard PRO React layouts
 import Default from "layouts/dashboards/default";
 import UserProfile from "layouts/pages/profile/Profile";
 import Subscription from "layouts/pages/account/billing";
@@ -24,6 +26,14 @@ const dashboardRoutes = [
     route: "/dashboard",
     component: <Dashboard />,
     noCollapse: true,
+    // collapse: [
+    //   {
+    //     name: "Default Dashboard",
+    //     key: "default-dashboard",
+    //     route: "/dashboard",
+    //     component: <Dashboard />,
+    //   },
+    // ],
   },
 
   {
@@ -46,6 +56,38 @@ const dashboardRoutes = [
       },
     ],
   },
+  //   {
+  //     type: "collapse",
+  //     name: "User Management",
+  //     key: "user-management",
+  //     icon: <Icon>person</Icon>,
+  //     collapse: [
+  //       {
+  //         name: "User Registration",
+  //         key: "user-registration",
+  //         route: "/authentication/sign-up/basic",
+  //         component: <UserProfile />,
+  //       },
+  //       {
+  //         name: "User Login",
+  //         key: "user-login",
+  //         route: "/authentication/sign-in/basic",
+  //         component: <UserProfile />,
+  //       },
+  //       {
+  //         name: "Password Recovery",
+  //         key: "password-recovery",
+  //         route: "/authentication/reset-password/basic",
+  //         component: <UserProfile />,
+  //       },
+  //       {
+  //         name: "Profile Management",
+  //         key: "profile-management",
+  //         route: "/pages/profile/profile-overview",
+  //         component: <UserProfile />,
+  //       },
+  //     ],
+  //   },
   {
     type: "collapse",
     name: "Payments",
@@ -66,6 +108,7 @@ const dashboardRoutes = [
       },
     ],
   },
+
   {
     type: "collapse",
     name: "Notifications",
@@ -88,6 +131,15 @@ const dashboardRoutes = [
   },
   {
     type: "collapse",
+    name: "Interests",
+    key: "user-interests",
+    icon: <Icon>search</Icon>,
+    route: "/pages/profile/teams",
+    component: <UserInterests />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
     name: "Profile",
     key: "user-profile",
     icon: <Icon>person</Icon>,
@@ -95,15 +147,32 @@ const dashboardRoutes = [
     component: <UserProfile />,
     noCollapse: true,
   },
-  {
-    type: "collapse",
-    name: "Interests",
-    key: "user-interests",
-    icon: <Icon>search</Icon>,
-    route: "/pages/profile/interests",
-    component: <UserInterests />,
-    noCollapse: true,
-  },
+  //   {
+  //     type: "collapse",
+  //     name: "User Management",
+  //     key: "admin-management",
+  //     icon: <Icon>admin_panel_settings</Icon>,
+  //     collapse: [
+  //       {
+  //         name: "Admin Dashboard",
+  //         key: "admin-dashboard",
+  //         route: "/pages/account/settings",
+  //         component: <AdminDashboard />,
+  //       },
+  //       {
+  //         name: "Manage Users",
+  //         key: "manage-users",
+  //         route: "/pages/users/reports",
+  //         component: <ManageUsers />,
+  //       },
+  //       {
+  //         name: "Manage Payments",
+  //         key: "manage-payments",
+  //         route: "/pages/users/new-user",
+  //         component: <ManagePayments />,
+  //       },
+  //     ],
+  //   },
 ];
 
 export default dashboardRoutes;
