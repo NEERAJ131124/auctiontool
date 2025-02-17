@@ -23,16 +23,19 @@ import Icon from "@mui/material/Icon";
 // Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+import { useNavigate } from "react-router-dom";
 
 function DefaultNavbarLink({
   name,
-  openHandler = false,
-  closeHandler = false,
+  openHandler = () => {},
+  closeHandler = () => {},
   children = false,
   collapseStatus = false,
   light = false,
+  route,
   ...rest
 }) {
+  const navigate = useNavigate();
   return (
     <>
       <SoftBox
@@ -41,6 +44,7 @@ function DefaultNavbarLink({
         p={1}
         onMouseEnter={children ? undefined : openHandler}
         onMouseLeave={children ? undefined : closeHandler}
+        onClick={() => navigate(route)}
         display="flex"
         alignItems="baseline"
         color={light ? "white" : "dark"}
@@ -55,9 +59,9 @@ function DefaultNavbarLink({
         >
           {name}
         </SoftTypography>
-        <SoftTypography variant="body2" color={light ? "white" : "dark"}>
+        {/* <SoftTypography variant="body2" color={light ? "white" : "dark"}>
           <Icon sx={{ fontWeight: "bold", verticalAlign: "middle" }}>keyboard_arrow_down</Icon>
-        </SoftTypography>
+        </SoftTypography> */}
       </SoftBox>
       {children && (
         <Collapse in={Boolean(collapseStatus)} timeout="auto" unmountOnExit>
@@ -68,15 +72,15 @@ function DefaultNavbarLink({
   );
 }
 
-
 // Typechecking props for the DefaultNavbarLink
 DefaultNavbarLink.propTypes = {
   name: PropTypes.string.isRequired,
-  openHandler: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
-  closeHandler: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+  openHandler: PropTypes.func,
+  closeHandler: PropTypes.func,
   children: PropTypes.node,
   collapseStatus: PropTypes.bool,
   light: PropTypes.bool,
+  route: PropTypes.string.isRequired,
 };
 
 export default DefaultNavbarLink;

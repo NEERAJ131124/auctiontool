@@ -38,11 +38,13 @@ function BasicLayout({ title = "", description = "", image, children }) {
     <PageLayout>
       <DefaultNavbar
         routes={pageRoutes}
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-pro-react",
-          label: "buy now",
-        }}
+        // action={
+        //   {
+        //     // type: "external",
+        //     // route: "https://creative-tim.com/product/soft-ui-dashboard-pro-react",
+        //     // label: "buy now",
+        //   }
+        // }
         transparent
         light
       />
@@ -92,7 +94,6 @@ function BasicLayout({ title = "", description = "", image, children }) {
     </PageLayout>
   );
 }
-
 
 // Typechecking props for the BasicLayout
 BasicLayout.propTypes = {

@@ -73,7 +73,7 @@ function Basic() {
   return (
     <BasicLayout
       title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
+      description="Access your auction account to bid, sell, and manage your listings with our secure sign-in portal."
       image={curved9}
     >
       <Card>
@@ -126,7 +126,7 @@ function Basic() {
               Don&apos;t have an account?&nbsp;
               <SoftTypography
                 component={Link}
-                to="/authentication/sign-up/basic"
+                to="/authentication/sign-up"
                 variant="button"
                 color="dark"
                 fontWeight="bold"

@@ -55,6 +55,8 @@ import { Provider } from "react-redux";
 import store from "store";
 import BasicSign from "layouts/authentication/sign-in/basic";
 import BasicSignup from "layouts/authentication/sign-up/basic";
+import ResetPassword from "layouts/authentication/reset-password/ResetPassword";
+import OtpLogin from "layouts/authentication/otp-login/OtpLogin";
 
 export default function App() {
   const [controller, dispatch] = useSoftUIController();
@@ -154,7 +156,8 @@ export default function App() {
 
           <Route path="/authentication/sign-up/success" element={<Success />} />
           <Route path="/authentication/sign-in/" element={<BasicSign />} />
-
+          <Route path="/authentication/reset-password" element={<ResetPassword />} />
+          <Route path="/authentication/otp-login" element={<OtpLogin />} />
           <Route path="/authentication/sign-up/" element={<BasicSignup />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="*" element={<Navigate to="/authentication/sign-in/" />} />

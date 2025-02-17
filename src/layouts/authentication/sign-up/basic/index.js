@@ -125,7 +125,7 @@ function SignUpForm() {
   return (
     <BasicLayout
       title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
+      description="Create your professional account to start listing and bidding on exclusive auctions."
       image={curved6}
     >
       <Card>

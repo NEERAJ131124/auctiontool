@@ -14,60 +14,26 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect } from "react";
-
-// react-router components
 import { Link } from "react-router-dom";
-
-// prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
-
-// @mui material components
 import Container from "@mui/material/Container";
 import Icon from "@mui/material/Icon";
-
-// Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
-
-// Soft UI Dashboard PRO React example components
 import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
-
-// Soft UI Dashboard PRO React base styles
 import breakpoints from "assets/theme/base/breakpoints";
+import pageRoutes from "page.routes";
 
-// DefaultNavbar dropdown menus
-import PagesMenu from "examples/Navbars/DefaultNavbar/Menus/PagesMenu";
-import AuthenticationMenu from "examples/Navbars/DefaultNavbar/Menus/AuthenticationMenu";
-import EcommerceMenu from "examples/Navbars/DefaultNavbar/Menus/EcommerceMenu";
-import ApplicationsMenu from "examples/Navbars/DefaultNavbar/Menus/ApplicationsMenu";
-import DocsMenu from "examples/Navbars/DefaultNavbar/Menus/DocsMenu";
-
-function DefaultNavbar({ routes, transparent = false, light = false, action = false }) {
-  const [pagesMenu, setPagesMenu] = useState(false);
-  const [authenticationMenu, setAuthenticationMenu] = useState(false);
-  const [ecommerceMenu, setEcommerceMenu] = useState(false);
-  const [applicationsMenu, setApplicationsMenu] = useState(false);
-  const [docsMenu, setDocsMenu] = useState(false);
+function DefaultNavbar({ transparent = false, light = false }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
 
-  const openPagesMenu = ({ currentTarget }) => setPagesMenu(currentTarget);
-  const closePagesMenu = () => setPagesMenu(false);
-  const openAuthenticationMenu = ({ currentTarget }) => setAuthenticationMenu(currentTarget);
-  const closeAuthenticationMenu = () => setAuthenticationMenu(false);
-  const openEcommerceMenu = ({ currentTarget }) => setEcommerceMenu(currentTarget);
-  const closeEcommerceMenu = () => setEcommerceMenu(false);
-  const openApplicationsMenu = ({ currentTarget }) => setApplicationsMenu(currentTarget);
-  const closeApplicationsMenu = () => setApplicationsMenu(false);
-  const openDocsMenu = ({ currentTarget }) => setDocsMenu(currentTarget);
-  const closeDocsMenu = () => setDocsMenu(false);
-  const openMobileNavbar = ({ currentTarget }) => setMobileNavbar(currentTarget.parentNode);
+  const openMobileNavbar = (event) => setMobileNavbar(event.currentTarget.parentNode);
   const closeMobileNavbar = () => setMobileNavbar(false);
 
   useEffect(() => {
-    // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
         setMobileView(true);
@@ -78,16 +44,9 @@ function DefaultNavbar({ routes, transparent = false, light = false, action = fa
       }
     }
 
-    /** 
-     The event listener that's calling the displayMobileNavbar function when 
-     resizing the window.
-    */
     window.addEventListener("resize", displayMobileNavbar);
-
-    // Call the displayMobileNavbar function to set the state with the initial value.
     displayMobileNavbar();
 
-    // Remove event listener on cleanup
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
 
@@ -115,43 +74,20 @@ function DefaultNavbar({ routes, transparent = false, light = false, action = fa
       >
         <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
           <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            Soft UI Dashboard PRO
+            Auction Management
           </SoftTypography>
         </SoftBox>
         <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-          <DefaultNavbarLink
-            name="pages"
-            openHandler={openPagesMenu}
-            closeHandler={closePagesMenu}
-            light={light}
-          />
-          <DefaultNavbarLink
-            name="authentication"
-            openHandler={openAuthenticationMenu}
-            closeHandler={closeAuthenticationMenu}
-            light={light}
-          />
-
-          <DefaultNavbarLink
-            name="application"
-            openHandler={openApplicationsMenu}
-            closeHandler={closeApplicationsMenu}
-            light={light}
-          />
-          <DefaultNavbarLink
-            name="ecommerce"
-            openHandler={openEcommerceMenu}
-            closeHandler={closeEcommerceMenu}
-            light={light}
-          />
-          <DefaultNavbarLink
-            name="docs"
-            openHandler={openDocsMenu}
-            closeHandler={closeDocsMenu}
-            light={light}
-          />
+          {pageRoutes.map((route) => (
+            <DefaultNavbarLink
+              key={route.key}
+              name={route.name}
+              route={route.route}
+              light={light}
+            />
+          ))}
         </SoftBox>
-        {action &&
+        {/* {action &&
           (action.type === "internal" ? (
             <SoftBox display={{ xs: "none", lg: "inline-block" }}>
               <SoftButton
@@ -180,7 +116,7 @@ function DefaultNavbar({ routes, transparent = false, light = false, action = fa
                 {action.label}
               </SoftButton>
             </SoftBox>
-          ))}
+          ))} */}
         <SoftBox
           display={{ xs: "inline-block", lg: "none" }}
           lineHeight={0}
@@ -193,26 +129,14 @@ function DefaultNavbar({ routes, transparent = false, light = false, action = fa
           <Icon fontSize="default">{mobileNavbar ? "close" : "menu"}</Icon>
         </SoftBox>
       </SoftBox>
-      <PagesMenu routes={routes} open={pagesMenu} close={closePagesMenu} />
-      <AuthenticationMenu
-        routes={routes}
-        open={authenticationMenu}
-        close={closeAuthenticationMenu}
-      />
-      <EcommerceMenu routes={routes} open={ecommerceMenu} close={closeEcommerceMenu} />
-      <ApplicationsMenu routes={routes} open={applicationsMenu} close={closeApplicationsMenu} />
-      <DocsMenu routes={routes} open={docsMenu} close={closeDocsMenu} />
       {mobileView && (
-        <DefaultNavbarMobile routes={routes} open={mobileNavbar} close={closeMobileNavbar} />
+        <DefaultNavbarMobile routes={pageRoutes} open={mobileNavbar} close={closeMobileNavbar} />
       )}
     </Container>
   );
 }
 
-
-// Typechecking props for the DefaultNavbar
 DefaultNavbar.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
   transparent: PropTypes.bool,
   light: PropTypes.bool,
   action: PropTypes.oneOfType([
