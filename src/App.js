@@ -155,12 +155,12 @@ export default function App() {
           {/* {getRoutes(routes)} */}
 
           <Route path="/authentication/sign-up/success" element={<Success />} />
-          <Route path="/authentication/sign-in/" element={<BasicSign />} />
+          <Route path="/authentication/sign-in" element={<BasicSign />} />
           <Route path="/authentication/reset-password" element={<ResetPassword />} />
           <Route path="/authentication/otp-login" element={<OtpLogin />} />
-          <Route path="/authentication/sign-up/" element={<BasicSignup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="*" element={<Navigate to="/authentication/sign-in/" />} />
+          <Route path="/authentication/sign-up" element={<BasicSignup />} />
+          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+          <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
         </Routes>
       </ThemeProvider>
     </Provider>

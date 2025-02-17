@@ -27,12 +27,15 @@ import SoftTypography from "components/SoftTypography";
 // Soft UI Dashboard PRO React base styles
 import typography from "assets/theme/base/typography";
 
-function Footer({ company = { href: "https://www.creative-tim.com/", name: "Creative Tim" }, links = [
-  { href: "https://www.creative-tim.com/", name: "Creative Tim" },
-  { href: "https://www.creative-tim.com/presentation", name: "About Us" },
-  { href: "https://www.creative-tim.com/blog", name: "Blog" },
-  { href: "https://www.creative-tim.com/license", name: "License" },
-] }) {
+function Footer({
+  company = { href: "https://auctiontool.vercel.app/", name: "Auction Listing" },
+  links = [
+    { href: "https://auctiontool.vercel.app/", name: "Auction Listing" },
+    { href: "https://auctiontool.vercel.app/presentation", name: "About Us" },
+    { href: "https://auctiontool.vercel.app/blog", name: "Blog" },
+    { href: "https://auctiontool.vercel.app/license", name: "License" },
+  ],
+}) {
   const { href, name } = company;
   const { size } = typography;
 
@@ -101,7 +104,6 @@ function Footer({ company = { href: "https://www.creative-tim.com/", name: "Crea
     </SoftBox>
   );
 }
-
 
 // Typechecking props for the Footer
 Footer.propTypes = {

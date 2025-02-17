@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -23,56 +23,89 @@ import LocationCityIcon from "@mui/icons-material/LocationCity";
 import PublicIcon from "@mui/icons-material/Public";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import Cookies from "universal-cookie";
+import { fetchUserData } from "slices/userSlice";
+import { useDispatch } from "react-redux";
+
+const validationSchema = yup.object({
+  name: yup.string().required("Name is required"),
+  email: yup.string().email("Enter a valid email").required("Email is required"),
+  phoneNumber: yup
+    .string()
+    .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits")
+    .required("Phone number is required"),
+  dateOfBirth: yup.date().required("Date of birth is required"),
+  address: yup.object({
+    street: yup.string().required("Street is required"),
+    city: yup.string().required("City is required"),
+    state: yup.string().required("State is required"),
+    zipCode: yup.string().required("Zip code is required"),
+    country: yup.string().required("Country is required"),
+  }),
+});
 
 function Profile() {
   const user = useSelector((state) => state.user.user);
   const [open, setOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
-    phoneNumber: user?.phoneNumber || "",
-    dateOfBirth: user?.dateOfBirth || "",
+  const dispatch = useDispatch();
+  const cookies = new Cookies();
+  const [initialValues, setInitialValues] = useState({
+    name: "",
+    email: "",
+    phoneNumber: "",
+    dateOfBirth: "",
     address: {
-      street: user?.address?.street || "",
-      city: user?.address?.city || "",
-      state: user?.address?.state || "",
-      zipCode: user?.address?.zipCode || "",
-      country: user?.address?.country || "",
+      street: "",
+      city: "",
+      state: "",
+      zipCode: "",
+      country: "",
+    },
+  });
+
+  useEffect(() => {
+    if (user) {
+      setInitialValues({
+        name: user.name || "",
+        email: user.email || "",
+        phoneNumber: user.phoneNumber || "",
+        dateOfBirth: user.dateOfBirth ? new Date(user.dateOfBirth).toISOString().split("T")[0] : "",
+        address: {
+          street: user.address?.street || "",
+          city: user.address?.city || "",
+          state: user.address?.state || "",
+          zipCode: user.address?.zipCode || "",
+          country: user.address?.country || "",
+        },
+      });
+    }
+  }, [user]);
+
+  const formik = useFormik({
+    initialValues,
+    enableReinitialize: true,
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const res = await axios.put(`${process.env.REACT_APP_API_URL}/api/users/profile`, values, {
+          headers: {
+            Authorization: `Bearer ${cookies.get("token")}`,
+          },
+        });
+        console.log(res);
+        dispatch(fetchUserData(res.data));
+
+        handleClose();
+      } catch (error) {
+        console.error("Error updating profile:", error);
+      }
     },
   });
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name.includes("address.")) {
-      const addressField = name.split(".")[1];
-      setFormData((prevData) => ({
-        ...prevData,
-        address: {
-          ...prevData.address,
-          [addressField]: value,
-        },
-      }));
-    } else {
-      setFormData((prevData) => ({ ...prevData, [name]: value }));
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.put("/api/user/profile", formData);
-      handleClose();
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <DashboardLayout>
@@ -82,18 +115,18 @@ function Profile() {
           <Grid item xs={12} md={4}>
             <Card sx={{ boxShadow: "0 8px 16px rgba(0,0,0,0.2)" }}>
               <SoftBox p={2} textAlign="center">
-                <SoftAvatar src={user.profilePicture} alt="profile" size="xl" />
+                <SoftAvatar src={user?.profilePicture} alt="profile" size="xl" />
                 <SoftTypography variant="h5" fontWeight="medium" mt={2}>
-                  {user.name}
+                  {user?.name}
                 </SoftTypography>
                 <SoftTypography variant="body2" color="text" mt={1}>
-                  {user.email}
+                  {user?.email}
                 </SoftTypography>
                 <SoftTypography variant="body2" color="text" mt={1}>
-                  {user.phoneNumber}
+                  {user?.phoneNumber}
                 </SoftTypography>
                 <SoftTypography variant="body2" color="text" mt={1}>
-                  {user.dateOfBirth ? new Date(user.dateOfBirth).toLocaleDateString() : "N/A"}
+                  {user?.dateOfBirth ? new Date(user?.dateOfBirth).toLocaleDateString() : "N/A"}
                 </SoftTypography>
                 <Button variant="contained" color="primary" onClick={handleOpen} sx={{ mt: 2 }}>
                   Edit Profile
@@ -108,13 +141,13 @@ function Profile() {
                   Address
                 </SoftTypography>
                 <SoftTypography variant="body2" color="text" mt={1}>
-                  {user.address.street}
+                  {user?.address.street}
                 </SoftTypography>
                 <SoftTypography variant="body2" color="text" mt={1}>
-                  {user.address.city}, {user.address.state} {user.address.zipCode}
+                  {user?.address.city}, {user?.address.state} {user?.address.zipCode}
                 </SoftTypography>
                 <SoftTypography variant="body2" color="text" mt={1}>
-                  {user.address.country}
+                  {user?.address.country}
                 </SoftTypography>
               </SoftBox>
             </Card>
@@ -124,8 +157,8 @@ function Profile() {
                   Payments
                 </SoftTypography>
                 <SoftBox mt={1}>
-                  {user.payments.length > 0 ? (
-                    user.payments.map((payment, index) => (
+                  {user?.payments.length > 0 ? (
+                    user?.payments.map((payment, index) => (
                       <SoftBox key={index} mb={2} display="flex" alignItems="center">
                         <SoftBox display="flex" alignItems="center" mr={2}>
                           <i className="fas fa-calendar-alt" style={{ marginRight: "8px" }} />
@@ -163,7 +196,7 @@ function Profile() {
       <Modal open={open} onClose={handleClose}>
         <Box
           component="form"
-          onSubmit={handleSubmit}
+          onSubmit={formik.handleSubmit}
           sx={{
             position: "absolute",
             top: "50%",
@@ -181,7 +214,6 @@ function Profile() {
           <SoftTypography variant="h6" fontWeight="medium" mb={2}>
             Edit Profile
           </SoftTypography>
-
           <Grid container spacing={2}>
             <Grid item xs={12} md={6}>
               <FormControl fullWidth margin="normal">
@@ -191,8 +223,11 @@ function Profile() {
                 <TextField
                   id="name"
                   name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.name && Boolean(formik.errors.name)}
+                  helperText={formik.touched.name && formik.errors.name}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -218,8 +253,11 @@ function Profile() {
                 <TextField
                   id="email"
                   name="email"
-                  value={formData.email}
-                  onChange={handleChange}
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -245,8 +283,17 @@ function Profile() {
                 <TextField
                   id="phoneNumber"
                   name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
+                  value={formik.values.phoneNumber}
+                  onChange={(e) => {
+                    const { value } = e.target;
+                    if (/^\d*$/.test(value)) {
+                      formik.setFieldValue("phoneNumber", value);
+                    }
+                  }}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
+                  helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+                  inputProps={{ maxLength: 10 }}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -273,8 +320,11 @@ function Profile() {
                   id="dateOfBirth"
                   name="dateOfBirth"
                   type="date"
-                  value={formData.dateOfBirth}
-                  onChange={handleChange}
+                  value={formik.values.dateOfBirth}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.dateOfBirth && Boolean(formik.errors.dateOfBirth)}
+                  helperText={formik.touched.dateOfBirth && formik.errors.dateOfBirth}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -301,8 +351,11 @@ function Profile() {
                 <TextField
                   id="street"
                   name="address.street"
-                  value={formData.address.street}
-                  onChange={handleChange}
+                  value={formik.values.address.street}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.address?.street && Boolean(formik.errors.address?.street)}
+                  helperText={formik.touched.address?.street && formik.errors.address?.street}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -324,8 +377,11 @@ function Profile() {
                 <TextField
                   id="city"
                   name="address.city"
-                  value={formData.address.city}
-                  onChange={handleChange}
+                  value={formik.values.address.city}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.address?.city && Boolean(formik.errors.address?.city)}
+                  helperText={formik.touched.address?.city && formik.errors.address?.city}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -351,8 +407,11 @@ function Profile() {
                 <TextField
                   id="state"
                   name="address.state"
-                  value={formData.address.state}
-                  onChange={handleChange}
+                  value={formik.values.address.state}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.address?.state && Boolean(formik.errors.address?.state)}
+                  helperText={formik.touched.address?.state && formik.errors.address?.state}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -378,8 +437,11 @@ function Profile() {
                 <TextField
                   id="zipCode"
                   name="address.zipCode"
-                  value={formData.address.zipCode}
-                  onChange={handleChange}
+                  value={formik.values.address.zipCode}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.address?.zipCode && Boolean(formik.errors.address?.zipCode)}
+                  helperText={formik.touched.address?.zipCode && formik.errors.address?.zipCode}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -405,8 +467,11 @@ function Profile() {
                 <TextField
                   id="country"
                   name="address.country"
-                  value={formData.address.country}
-                  onChange={handleChange}
+                  value={formik.values.address.country}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.address?.country && Boolean(formik.errors.address?.country)}
+                  helperText={formik.touched.address?.country && formik.errors.address?.country}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -421,12 +486,19 @@ function Profile() {
               </FormControl>
             </Grid>
           </Grid>
-          <Button variant="contained" color="secondary" sx={{ mt: 2 }}>
-            Cancel
-          </Button>
-          <Button type="submit" variant="contained" color="secondary" sx={{ mt: 2 }}>
-            Save
-          </Button>
+          <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ color: "#111" }}
+              onClick={handleClose}
+            >
+              Cancel
+            </Button>
+            <Button type="submit" variant="contained" color="primary" style={{ color: "#fff" }}>
+              Save
+            </Button>
+          </Box>{" "}
         </Box>
       </Modal>
     </DashboardLayout>
