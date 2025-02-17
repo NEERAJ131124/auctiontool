@@ -53,10 +53,12 @@ import Dashboard from "layouts/dashboards/default/Dashboard";
 
 import { Provider } from "react-redux";
 import store from "store";
-import BasicSign from "layouts/authentication/sign-in/basic";
+// import BasicSign from "layouts/authentication/sign-in/basic";
 import BasicSignup from "layouts/authentication/sign-up/basic";
 import ResetPassword from "layouts/authentication/reset-password/ResetPassword";
 import OtpLogin from "layouts/authentication/otp-login/OtpLogin";
+import IllustrationSignIn from "layouts/authentication/sign-in/illustration";
+import Illustration from "layouts/authentication/sign-up/illustration";
 
 export default function App() {
   const [controller, dispatch] = useSoftUIController();
@@ -155,10 +157,10 @@ export default function App() {
           {/* {getRoutes(routes)} */}
 
           <Route path="/authentication/sign-up/success" element={<Success />} />
-          <Route path="/authentication/sign-in" element={<BasicSign />} />
+          <Route path="/authentication/sign-in" element={<IllustrationSignIn />} />
           <Route path="/authentication/reset-password" element={<ResetPassword />} />
           <Route path="/authentication/otp-login" element={<OtpLogin />} />
-          <Route path="/authentication/sign-up" element={<BasicSignup />} />
+          <Route path="/authentication/sign-up" element={<Illustration />} />
           {/* <Route path="/dashboard" element={<Dashboard />} /> */}
           <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
         </Routes>

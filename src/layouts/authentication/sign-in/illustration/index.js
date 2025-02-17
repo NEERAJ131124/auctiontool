@@ -13,30 +13,64 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
-
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// @mui material components
+import { useState, useEffect } from "react";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
 import Switch from "@mui/material/Switch";
-
-// Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
-
-// Authentication layout components
 import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
-
-// Image
 import chat from "assets/images/illustrations/chat.png";
+import Cookies from "universal-cookie";
+
+const validationSchema = yup.object({
+  email: yup.string().email("Enter a valid email").required("Email is required"),
+  password: yup
+    .string()
+    .min(8, "Password should be of minimum 8 characters length")
+    .required("Password is required"),
+});
 
 function Illustration() {
   const [rememberMe, setRememberMe] = useState(false);
+  const cookies = new Cookies();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = cookies.get("token");
+    if (token) {
+      navigate("/dashboard");
+    }
+  }, [navigate, cookies]);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+  const handleSubmit = async (values) => {
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, values);
+      Swal.fire("Success", "Signed in successfully", "success");
+      if (response.data.token) {
+        cookies.set("token", response.data.token, { path: "/", maxAge: 86400 });
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      Swal.fire("Error", "Invalid credentials", "error");
+    }
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: handleSubmit,
+  });
 
   return (
     <IllustrationLayout
@@ -49,26 +83,40 @@ function Illustration() {
           "The more effortless the writing looks, the more effort the writer actually put into the process.",
       }}
     >
-      <SoftBox component="form" role="form">
+      <SoftBox component="form" role="form" onSubmit={formik.handleSubmit}>
         <SoftBox mb={2}>
-          <SoftInput type="email" placeholder="Email" size="large" />
+          <SoftInput
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
+          {formik.errors.email ? <div>{formik.errors.email}</div> : null}
         </SoftBox>
-        <SoftBox mb={2}>
-          <SoftInput type="password" placeholder="Password" size="large" />
-        </SoftBox>
-        <SoftBox display="flex" alignItems="center">
-          <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+        <SoftBox mb={2} position="relative">
+          <SoftInput
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          {formik.errors.password ? <div>{formik.errors.password}</div> : null}
           <SoftTypography
-            variant="button"
-            fontWeight="regular"
-            onClick={handleSetRememberMe}
-            sx={{ cursor: "pointer", userSelect: "none" }}
+            component={Link}
+            to="/authentication/reset-password"
+            variant="caption"
+            color="dark"
+            fontWeight="bold"
+            textGradient
+            sx={{ position: "absolute", right: 0, bottom: -20 }}
           >
-            &nbsp;&nbsp;Remember me
+            Forgot Password?
           </SoftTypography>
         </SoftBox>
         <SoftBox mt={4} mb={1}>
-          <SoftButton variant="gradient" color="info" size="large" fullWidth>
+          <SoftButton variant="gradient" color="info" size="large" fullWidth type="submit">
             sign in
           </SoftButton>
         </SoftBox>
@@ -77,13 +125,28 @@ function Illustration() {
             Don&apos;t have an account?{" "}
             <SoftTypography
               component={Link}
-              to="/authentication/sign-up/illustration"
+              to="/authentication/sign-up"
               variant="button"
               color="info"
               fontWeight="medium"
               textGradient
             >
               Sign up
+            </SoftTypography>
+          </SoftTypography>
+        </SoftBox>
+        <SoftBox mt={3} textAlign="center">
+          <SoftTypography variant="button" color="text" fontWeight="regular">
+            Want to sign in using OTP?&nbsp;
+            <SoftTypography
+              component={Link}
+              to="/authentication/otp-login"
+              variant="button"
+              color="info"
+              fontWeight="medium"
+              textGradient
+            >
+              Sign in using OTP
             </SoftTypography>
           </SoftTypography>
         </SoftBox>

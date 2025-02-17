@@ -134,7 +134,7 @@ function SignUpForm() {
             Register
           </SoftTypography>
         </SoftBox>
-        {/* <SoftBox mb={2}>
+        {/* <SoftBox mb={2}> 
           <Socials />
         </SoftBox> */}
         {/* <Separator /> */}

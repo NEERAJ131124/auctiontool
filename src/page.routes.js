@@ -22,12 +22,12 @@ const pageRoutes = [
   //   route: "/authentication/reset-password",
   //   component: <ResetPassword />,
   // },
-  {
-    name: "OTP Login",
-    key: "otp-login",
-    route: "/authentication/otp-login",
-    component: <OtpLogin />,
-  },
+  // {
+  //   name: "OTP Login",
+  //   key: "otp-login",
+  //   route: "/authentication/otp-login",
+  //   component: <OtpLogin />,
+  // },
   {
     name: "Sign Up",
     key: "sign-up",
