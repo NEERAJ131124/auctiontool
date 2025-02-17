@@ -82,41 +82,43 @@ function SignUpForm() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+      if (!stripePromise) return;
+
       setLoading(true);
+
       try {
-        const result = await Swal.fire({
-          title: "Do you want to make a payment?",
-          showDenyButton: true,
-          showCancelButton: true,
-          confirmButtonText: "Yes",
-          denyButtonText: "No",
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/payment/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: values.email,
+            name: values.name,
+            password: values.password,
+          }),
         });
 
-        if (result.isConfirmed) {
+        const data = await response.json();
+
+        if (response.ok) {
           const stripe = await stripePromise;
-          const response = await axios.post(
-            `${process.env.REACT_APP_API_URL}/api/payment/register`,
-            {
-              name: values.name,
-              email: values.email,
-              password: values.password,
-            }
-          );
-          console.log(response);
-          const { id: sessionId } = response.data;
-          const { error } = await stripe.redirectToCheckout({ sessionId });
+          const { error } = await stripe.redirectToCheckout({
+            sessionId: data.sessionId,
+          });
 
           if (error) {
-            Swal.fire("Error", error.message, "error");
+            console.error("Error redirecting to checkout:", error);
+            Swal.fire("Error", `Error: ${error.message}`, "error");
           }
-        } else if (result.isDenied) {
-          Swal.fire("Info", "Payment is required for registration", "info");
+        } else {
+          console.error("Error:", data.error);
+          Swal.fire("Error", `Error: ${data.error}`, "error");
         }
       } catch (error) {
-        console.log(error);
-        Swal.fire("Error", "Registration failed", "error");
+        console.error("Error:", error);
+        Swal.fire("Error", "An error occurred. Please try again.", "error");
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     },
   });
 
