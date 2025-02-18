@@ -154,7 +154,7 @@ export default function App() {
           </>
         )}
         <Routes>
-          {/* {getRoutes(dashboardRoutes)} */}
+          {getRoutes(dashboardRoutes)}
           {/* <Route path="/" element={<Home />} /> */}
           <Route path="/authentication/sign-up/success" element={<Success />} />
           <Route path="/authentication/sign-in" element={<IllustrationSignIn />} />
