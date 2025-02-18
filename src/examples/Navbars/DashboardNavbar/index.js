@@ -116,7 +116,7 @@ function DashboardNavbar({ absolute = false, light = false, isMini = false }) {
     Object.keys(allCookies).forEach((cookieName) => {
       cookies.remove(cookieName, { path: "/" });
     });
-    navigate("/authentication/sign-in/basic");
+    navigate("/");
   };
 
   // Render the notifications menu

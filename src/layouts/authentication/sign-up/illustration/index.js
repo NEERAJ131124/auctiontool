@@ -114,20 +114,20 @@ function SignUpForm() {
   return (
     <IllustrationLayout
       title="Sign Up"
-      description="Enter your email and password to register"
+      description="Enter your details to join our exclusive auction platform"
       illustration={{
         image: rocket,
         title: "Your journey starts here",
         description:
-          "Just as it takes a company to sustain a product, it takes a community to sustain a protocol.",
+          "Join thousands of buyers and sellers in our trusted marketplace for premium auctions and exceptional deals.",
       }}
     >
       <Card>
-        <SoftBox p={3} mb={1} textAlign="center">
+        {/* <SoftBox p={3} mb={1} textAlign="center">
           <SoftTypography variant="h5" fontWeight="medium">
             Register
           </SoftTypography>
-        </SoftBox>
+        </SoftBox> */}
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form" onSubmit={formik.handleSubmit}>
             <SoftBox mb={2}>
@@ -197,7 +197,7 @@ function SignUpForm() {
                 type="submit"
                 disabled={loading}
               >
-                {loading ? "Loading..." : "Sign Up"}
+                {loading ? "Signing Up..." : "Sign Up"}
               </SoftButton>
             </SoftBox>
             <SoftBox mt={3} textAlign="center">

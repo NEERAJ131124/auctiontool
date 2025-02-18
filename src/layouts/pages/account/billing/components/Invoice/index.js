@@ -23,7 +23,25 @@ import Icon from "@mui/material/Icon";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
-function Invoice({ date, id, price, noGutter = false }) {
+function Invoice({ transactionHistory, noGutter }) {
+  // Convert the date to local date
+  const localDate = new Date(transactionHistory.date).toLocaleDateString();
+
+  const handlePrint = () => {
+    const printContent = `
+      <div>
+        <h3>Transaction Details</h3>
+        <p>Date: ${localDate}</p>
+        <p>Status: ${transactionHistory.status}</p>
+        <p>Amount: ${transactionHistory.amount}</p>
+      </div>
+    `;
+    const printWindow = window.open("", "_blank");
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+    printWindow.print();
+  };
+
   return (
     <SoftBox
       component="li"
@@ -36,15 +54,15 @@ function Invoice({ date, id, price, noGutter = false }) {
     >
       <SoftBox lineHeight={1.125}>
         <SoftTypography display="block" variant="button" fontWeight="medium">
-          {date}
+          {localDate}
         </SoftTypography>
         <SoftTypography variant="caption" fontWeight="regular" color="text">
-          {id}
+          {transactionHistory.status}
         </SoftTypography>
       </SoftBox>
       <SoftBox display="flex" alignItems="center">
         <SoftTypography variant="button" fontWeight="regular" color="text">
-          {price}
+          {transactionHistory.amount}$
         </SoftTypography>
         <SoftBox
           display="flex"
@@ -52,6 +70,7 @@ function Invoice({ date, id, price, noGutter = false }) {
           lineHeight={1}
           ml={3}
           sx={{ cursor: "pointer" }}
+          onClick={handlePrint}
         >
           <Icon fontSize="small">picture_as_pdf</Icon>
           <SoftTypography variant="button" fontWeight="bold">
@@ -63,12 +82,13 @@ function Invoice({ date, id, price, noGutter = false }) {
   );
 }
 
-
 // Typechecking props for the Invoice
 Invoice.propTypes = {
-  date: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  transactionHistory: PropTypes.shape({
+    date: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    amount: PropTypes.number.isRequired,
+  }).isRequired,
   noGutter: PropTypes.bool,
 };
 

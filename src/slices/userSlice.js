@@ -6,7 +6,7 @@ const cookies = new Cookies();
 
 export const fetchUserData = createAsyncThunk("user/fetchUserData", async () => {
   const token = cookies.get("token");
-  const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/profile`, {
+  const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/users/profile`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

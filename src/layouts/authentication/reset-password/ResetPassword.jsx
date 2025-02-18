@@ -7,8 +7,8 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
-import BasicLayout from "layouts/authentication/components/BasicLayout";
-import curved6 from "assets/images/curved-images/curved6.jpg";
+import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
+import rocket from "assets/images/illustrations/rocket-white.png";
 
 function ResetPassword() {
   const [email, setEmail] = useState("");
@@ -47,10 +47,15 @@ function ResetPassword() {
   };
 
   return (
-    <BasicLayout
+    <IllustrationLayout
       title="Reset Password"
       description="Enter your email to receive an OTP for password reset."
-      image={curved6}
+      illustration={{
+        image: rocket,
+        title: "Reset your password",
+        description:
+          "Enter your email to receive an OTP for password reset. Follow the instructions to reset your password.",
+      }}
     >
       <Card>
         <SoftBox p={3} mb={1} textAlign="center">
@@ -70,7 +75,7 @@ function ResetPassword() {
                 />
               </SoftBox>
               <SoftBox mt={4} mb={1}>
-                <SoftButton variant="gradient" color="dark" fullWidth onClick={handleSendOtp}>
+                <SoftButton variant="gradient" color="info" fullWidth onClick={handleSendOtp}>
                   Send OTP
                 </SoftButton>
               </SoftBox>
@@ -94,7 +99,7 @@ function ResetPassword() {
                 />
               </SoftBox>
               <SoftBox mt={4} mb={1}>
-                <SoftButton variant="gradient" color="dark" fullWidth onClick={handleResetPassword}>
+                <SoftButton variant="gradient" color="info" fullWidth onClick={handleResetPassword}>
                   Reset Password
                 </SoftButton>
               </SoftBox>
@@ -105,9 +110,9 @@ function ResetPassword() {
               Want to sign in using password?&nbsp;
               <SoftTypography
                 component={Link}
-                to="/authentication/sign-in/basic"
+                to="/authentication/sign-in"
                 variant="button"
-                color="dark"
+                color="info"
                 fontWeight="bold"
                 textGradient
               >
@@ -117,7 +122,7 @@ function ResetPassword() {
           </SoftBox>
         </SoftBox>
       </Card>
-    </BasicLayout>
+    </IllustrationLayout>
   );
 }
 

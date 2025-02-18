@@ -40,6 +40,7 @@ import SidenavItem from "examples/Sidenav/SidenavItem";
 // Custom styles for the Sidenav
 import SidenavRoot from "examples/Sidenav/SidenavRoot";
 import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
+import logo from "assets/images/logos/logo.png";
 
 // Soft UI Dashboard PRO React context
 import { useSoftUIController, setMiniSidenav } from "context";
@@ -234,7 +235,18 @@ function Sidenav({ color = "info", brand = "", brandName, routes, ...rest }) {
           <SoftBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
+            display="flex"
+            alignItems="center"
           >
+            <SoftBox
+              component="img"
+              src={logo}
+              alt="Logo"
+              width="40px"
+              height="40px"
+              mr={1}
+              sx={{ borderRadius: "50%" }}
+            />
             <SoftTypography component="h6" variant="button" fontWeight="medium">
               {brandName}
             </SoftTypography>

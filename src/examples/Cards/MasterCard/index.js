@@ -27,8 +27,11 @@ import SoftTypography from "components/SoftTypography";
 // Images
 import curved14 from "assets/images/curved-images/curved14.jpg";
 import masterCardLogo from "assets/images/logos/mastercard.png";
+import visaLogo from "assets/images/logos/visa.png";
+import amexLogo from "assets/images/logos/amex.png";
+import discoverLogo from "assets/images/logos/Discover.png";
 
-function MasterCard({ color = "dark", number, holder, expires }) {
+function MasterCard({ color = "dark", number, holder, expires, cardType }) {
   const numbers = [...`${number}`];
 
   if (numbers.length < 16 || numbers.length > 16) {
@@ -37,10 +40,24 @@ function MasterCard({ color = "dark", number, holder, expires }) {
     );
   }
 
-  const num1 = numbers.slice(0, 4).join("");
-  const num2 = numbers.slice(4, 8).join("");
-  const num3 = numbers.slice(8, 12).join("");
+  const num1 = "XXXX";
+  const num2 = "XXXX";
+  const num3 = "XXXX";
   const num4 = numbers.slice(12, 16).join("");
+
+  const getCardLogo = (type) => {
+    switch (type) {
+      case "visa":
+        return visaLogo;
+      case "amex":
+        return amexLogo;
+      case "discover":
+        return discoverLogo;
+      case "mastercard":
+      default:
+        return masterCardLogo;
+    }
+  };
 
   return (
     <Card
@@ -51,13 +68,13 @@ function MasterCard({ color = "dark", number, holder, expires }) {
       }) => ({
         background: gradients[color]
           ? `${linearGradient(
-            rgba(gradients[color].main, 0.8),
-            rgba(gradients[color].state, 0.8)
-          )}, url(${curved14})`
+              rgba(gradients[color].main, 0.8),
+              rgba(gradients[color].state, 0.8)
+            )}, url(${curved14})`
           : `${linearGradient(
-            rgba(gradients.dark.main, 0.8),
-            rgba(gradients.dark.state, 0.8)
-          )}, url(${curved14})`,
+              rgba(gradients.dark.main, 0.8),
+              rgba(gradients.dark.state, 0.8)
+            )}, url(${curved14})`,
         boxShadow: xl,
       })}
     >
@@ -93,7 +110,13 @@ function MasterCard({ color = "dark", number, holder, expires }) {
             </SoftBox>
           </SoftBox>
           <SoftBox display="flex" justifyContent="flex-end" width="20%">
-            <SoftBox component="img" src={masterCardLogo} alt="master card" width="60%" mt={1} />
+            <SoftBox
+              component="img"
+              src={getCardLogo(cardType)}
+              alt="card logo"
+              width="60%"
+              mt={1}
+            />
           </SoftBox>
         </SoftBox>
       </SoftBox>
@@ -101,13 +124,13 @@ function MasterCard({ color = "dark", number, holder, expires }) {
   );
 }
 
-
 // Typechecking props for the MasterCard
 MasterCard.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   number: PropTypes.number.isRequired,
   holder: PropTypes.string.isRequired,
   expires: PropTypes.string.isRequired,
+  cardType: PropTypes.oneOf(["visa", "amex", "discover", "mastercard"]).isRequired,
 };
 
 export default MasterCard;

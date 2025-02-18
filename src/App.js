@@ -59,6 +59,7 @@ import ResetPassword from "layouts/authentication/reset-password/ResetPassword";
 import OtpLogin from "layouts/authentication/otp-login/OtpLogin";
 import IllustrationSignIn from "layouts/authentication/sign-in/illustration";
 import Illustration from "layouts/authentication/sign-up/illustration";
+import Home from "layouts/pages/home/Home";
 
 export default function App() {
   const [controller, dispatch] = useSoftUIController();
@@ -153,9 +154,8 @@ export default function App() {
           </>
         )}
         <Routes>
-          {getRoutes(dashboardRoutes)}
-          {/* {getRoutes(routes)} */}
-
+          {/* {getRoutes(dashboardRoutes)} */}
+          {/* <Route path="/" element={<Home />} /> */}
           <Route path="/authentication/sign-up/success" element={<Success />} />
           <Route path="/authentication/sign-in" element={<IllustrationSignIn />} />
           <Route path="/authentication/reset-password" element={<ResetPassword />} />

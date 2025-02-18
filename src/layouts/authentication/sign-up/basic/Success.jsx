@@ -35,11 +35,11 @@ const Success = () => {
           }
         } catch (error) {
           Swal.fire("Error", "Payment not successful", "error");
-          //   navigate("/authentication/sign-up/basic");
+          navigate("/authentication/sign-up");
         }
       } else {
         Swal.fire("Error", "No session ID found", "error");
-        // navigate("/authentication/sign-up/basic");
+        navigate("/authentication/sign-up");
       }
     };
 

@@ -38,6 +38,7 @@ const validationSchema = yup.object({
 
 function Illustration() {
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
   const cookies = new Cookies();
   const navigate = useNavigate();
 
@@ -51,6 +52,7 @@ function Illustration() {
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const handleSubmit = async (values) => {
+    setLoading(true);
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, values);
       Swal.fire("Success", "Signed in successfully", "success");
@@ -60,6 +62,8 @@ function Illustration() {
       }
     } catch (error) {
       Swal.fire("Error", "Invalid credentials", "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,12 +79,12 @@ function Illustration() {
   return (
     <IllustrationLayout
       title="Sign In"
-      description="Enter your email and password to sign in"
+      description="Please enter your credentials to access your account"
       illustration={{
         image: chat,
-        title: '"Attention is the new currency"',
+        title: '"Welcome to Premium Auctions"',
         description:
-          "The more effortless the writing looks, the more effort the writer actually put into the process.",
+          "Access your account to bid, sell and manage your auction listings with our secure platform.",
       }}
     >
       <SoftBox component="form" role="form" onSubmit={formik.handleSubmit}>
@@ -116,8 +120,15 @@ function Illustration() {
           </SoftTypography>
         </SoftBox>
         <SoftBox mt={4} mb={1}>
-          <SoftButton variant="gradient" color="info" size="large" fullWidth type="submit">
-            sign in
+          <SoftButton
+            disabled={loading}
+            variant="gradient"
+            color="info"
+            size="large"
+            fullWidth
+            type="submit"
+          >
+            {loading ? "Signing In..." : "Sign In"}
           </SoftButton>
         </SoftBox>
         <SoftBox mt={3} textAlign="center">

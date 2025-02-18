@@ -7,16 +7,19 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
-import BasicLayout from "layouts/authentication/components/BasicLayout";
-import curved6 from "assets/images/curved-images/curved6.jpg";
+import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
+import rocket from "assets/images/illustrations/rocket-white.png";
 
 function OtpLogin() {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [step, setStep] = useState(1);
   const navigate = useNavigate();
 
-  const handleSendOtp = async () => {
+  const handleSendOtp = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/otp/send-otp`, {
         email,
@@ -25,10 +28,14 @@ function OtpLogin() {
       setStep(2);
     } catch (error) {
       Swal.fire("Error", error.response.data.msg, "error");
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleVerifyOtp = async () => {
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/otp/verify-otp`, {
         email,
@@ -40,24 +47,31 @@ function OtpLogin() {
       navigate("/dashboard");
     } catch (error) {
       Swal.fire("Error", error.response.data.msg, "error");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <BasicLayout
-      title="Welcome!"
+    <IllustrationLayout
+      title="OTP Login"
       description="Use these awesome forms to login or create new account in your project for free."
-      image={curved6}
+      illustration={{
+        image: rocket,
+        title: "Secure OTP Login",
+        description:
+          "Enter your email to receive an OTP for secure login. Follow the instructions to access your account.",
+      }}
     >
       <Card>
-        <SoftBox p={3} mb={1} textAlign="center">
+        {/* <SoftBox p={3} mb={1} textAlign="center">
           <SoftTypography variant="h5" fontWeight="medium">
             OTP Login
           </SoftTypography>
-        </SoftBox>
+        </SoftBox> */}
         <SoftBox pt={2} pb={3} px={3}>
           {step === 1 ? (
-            <SoftBox component="form" role="form">
+            <SoftBox component="form" role="form" onSubmit={handleSendOtp}>
               <SoftBox mb={2}>
                 <SoftInput
                   type="email"
@@ -67,13 +81,13 @@ function OtpLogin() {
                 />
               </SoftBox>
               <SoftBox mt={4} mb={1}>
-                <SoftButton variant="gradient" color="dark" fullWidth onClick={handleSendOtp}>
-                  Send OTP
+                <SoftButton variant="gradient" color="info" fullWidth type="submit">
+                  {loading ? "Sending OTP..." : "Send OTP"}
                 </SoftButton>
               </SoftBox>
             </SoftBox>
           ) : (
-            <SoftBox component="form" role="form">
+            <SoftBox component="form" role="form" onSubmit={handleVerifyOtp}>
               <SoftBox mb={2}>
                 <SoftInput
                   type="text"
@@ -83,8 +97,8 @@ function OtpLogin() {
                 />
               </SoftBox>
               <SoftBox mt={4} mb={1}>
-                <SoftButton variant="gradient" color="dark" fullWidth onClick={handleVerifyOtp}>
-                  Verify OTP
+                <SoftButton variant="gradient" color="info" fullWidth type="submit">
+                  {loading ? "Verifying OTP..." : "Verify OTP"}
                 </SoftButton>
               </SoftBox>
             </SoftBox>
@@ -94,9 +108,9 @@ function OtpLogin() {
               Want to sign in using password?&nbsp;
               <SoftTypography
                 component={Link}
-                to="/authentication/sign-in/basic"
+                to="/authentication/sign-in"
                 variant="button"
-                color="dark"
+                color="info"
                 fontWeight="bold"
                 textGradient
               >
@@ -106,7 +120,7 @@ function OtpLogin() {
           </SoftBox>
         </SoftBox>
       </Card>
-    </BasicLayout>
+    </IllustrationLayout>
   );
 }
 

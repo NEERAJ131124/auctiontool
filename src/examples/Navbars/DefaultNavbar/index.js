@@ -25,6 +25,7 @@ import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink"
 import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
 import breakpoints from "assets/theme/base/breakpoints";
 import pageRoutes from "page.routes";
+import logo from "assets/images/logos/logo.png";
 
 function DefaultNavbar({ transparent = false, light = false }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
@@ -72,7 +73,23 @@ function DefaultNavbar({ transparent = false, light = false }) {
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
+        <SoftBox
+          component={Link}
+          to="/"
+          py={transparent ? 1.5 : 0.75}
+          lineHeight={1}
+          display="flex"
+          alignItems="center"
+        >
+          <SoftBox
+            component="img"
+            src={logo}
+            alt="Logo"
+            width="40px"
+            height="40px"
+            mr={1}
+            sx={{ borderRadius: "50%" }}
+          />
           <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
             Auction Management
           </SoftTypography>
