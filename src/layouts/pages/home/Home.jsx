@@ -35,13 +35,13 @@ export default function Home() {
       />
       <Hero />
       <Stats />
-      {/*<HowItWorks />
+      <HowItWorks />
       <AuctionSection />
       <BodyTypes />
       <AboutUs />
-      <Testimonials />
-      <LatestNews />
-      <Newsletter /> */}
+      {/* <Testimonials /> */}
+      {/* <LatestNews /> */}
+      {/* <Newsletter /> */}
       <Footer />
     </SoftBox>
   );

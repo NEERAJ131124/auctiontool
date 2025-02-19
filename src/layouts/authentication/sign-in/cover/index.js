@@ -14,81 +14,128 @@ Coded by www.creative-tim.com
 */
 
 import { useState } from "react";
-
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// @mui material components
-import Switch from "@mui/material/Switch";
-
-// Soft UI Dashboard PRO React components
+import { useFormik } from "formik";
+import * as yup from "yup";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { Link, useNavigate } from "react-router-dom";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
-
-// Authentication layout components
 import CoverLayout from "layouts/authentication/components/CoverLayout";
-
-// Images
 import curved9 from "assets/images/curved-images/curved9.jpg";
+import Cookies from "universal-cookie";
 
-function Cover() {
-  const [rememberMe, setRememberMe] = useState(true);
+const validationSchema = yup.object({
+  email: yup.string().email("Enter a valid email").required("Email is required"),
+  password: yup
+    .string()
+    .min(8, "Password should be of minimum 8 characters length")
+    .required("Password is required"),
+});
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+function AdminSignIn() {
+  const [loading, setLoading] = useState(false);
+  const cookies = new Cookies();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (values) => {
+    setLoading(true);
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/admin/login`, values);
+      Swal.fire("Success", "Signed in successfully", "success");
+      if (response.data.token) {
+        cookies.set("token", response.data.token, { path: "/", maxAge: 86400 });
+        cookies.set("userType", response.data.userType, { path: "/", maxAge: 86400 });
+        navigate("/dashboard");
+        console.log(response);
+      }
+    } catch (error) {
+      if (error.response) {
+        const { status, data } = error.response;
+        if (status === 400) {
+          Swal.fire("Error", data.message || "Bad Request", "error");
+        } else if (status === 401) {
+          Swal.fire("Error", data.message || "Unauthorized", "error");
+        } else if (status === 403) {
+          Swal.fire("Error", data.message || "Forbidden", "error");
+        } else if (status === 500) {
+          Swal.fire("Error", data.message || "Server Error", "error");
+        } else {
+          Swal.fire("Error", data.message || "An error occurred", "error");
+        }
+      } else {
+        Swal.fire("Error", "An error occurred", "error");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: handleSubmit,
+  });
 
   return (
     <CoverLayout
-      title="Welcome back"
-      description="Enter your email and password to sign in"
+      title="Admin Login"
+      description="Enter your admin credentials to sign in"
       image={curved9}
     >
-      <SoftBox component="form" role="form">
+      <SoftBox component="form" role="form" onSubmit={formik.handleSubmit}>
         <SoftBox mb={2} lineHeight={1.25}>
           <SoftBox mb={1} ml={0.5}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Email
+              Admin Email
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="email" placeholder="Email" />
+          <SoftInput
+            type="email"
+            placeholder="Admin Email"
+            name="email"
+            onChange={formik.handleChange}
+            value={formik.values.email}
+          />
+          {formik.errors.email ? <div>{formik.errors.email}</div> : null}
         </SoftBox>
         <SoftBox mb={2} lineHeight={1.25}>
           <SoftBox mb={1} ml={0.5}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Password
+              Admin Password
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="password" placeholder="Password" />
-        </SoftBox>
-        <SoftBox display="flex" alignItems="center">
-          <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-          <SoftTypography
-            variant="button"
-            fontWeight="regular"
-            onClick={handleSetRememberMe}
-            sx={{ cursor: "pointer", userSelect: "none" }}
-          >
-            &nbsp;&nbsp;Remember me
-          </SoftTypography>
+          <SoftInput
+            type="password"
+            placeholder="Admin Password"
+            name="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+          />
+          {formik.errors.password ? <div>{formik.errors.password}</div> : null}
         </SoftBox>
         <SoftBox mt={4} mb={1}>
-          <SoftButton variant="gradient" color="info" fullWidth>
-            sign in
+          <SoftButton variant="gradient" color="dark" fullWidth type="submit" disabled={loading}>
+            {loading ? "Signing In..." : "Admin Sign In"}
           </SoftButton>
         </SoftBox>
         <SoftBox mt={3} textAlign="center">
           <SoftTypography variant="button" color="text" fontWeight="regular">
-            Don&apos;t have an account?{" "}
+            Forgot your password?{" "}
             <SoftTypography
               component={Link}
-              to="/authentication/sign-up/cover"
+              to="/authentication/reset-password"
               variant="button"
-              color="info"
+              color="dark"
               fontWeight="medium"
               textGradient
             >
-              Sign up
+              Reset Password
             </SoftTypography>
           </SoftTypography>
         </SoftBox>
@@ -97,4 +144,4 @@ function Cover() {
   );
 }
 
-export default Cover;
+export default AdminSignIn;

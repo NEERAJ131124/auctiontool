@@ -1,10 +1,20 @@
 import React from "react";
+import { FormControl, InputLabel, TextField, InputAdornment } from "@mui/material";
+import CarIcon from "@mui/icons-material/DirectionsCar";
+import ModelIcon from "@mui/icons-material/DriveEta";
+import BodyIcon from "@mui/icons-material/CarRepair";
+import FuelIcon from "@mui/icons-material/LocalGasStation";
+import Button from "@mui/material/Button";
+import landing from "../../../../assets/images/landing.jpg";
 
 export default function Hero() {
   return (
-    <div style={{ position: "relative", height: "100vh", width: "100%" }} sx={{ px: { md: "5%" } }}>
+    <div
+      style={{ position: "relative", height: "100vh", width: "100%", marginBottom: "15vh" }}
+      sx={{ px: { md: "5%" } }}
+    >
       <img
-        src="https://placehold.co/600x400"
+        src={landing}
         alt="Mercedes-Benz AMG GT-R"
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
       />
@@ -34,28 +44,12 @@ export default function Hero() {
               transmission.
             </p>
             <div style={{ display: "flex", gap: "10px" }}>
-              <button
-                style={{
-                  backgroundColor: "red",
-                  color: "white",
-                  padding: "10px 20px",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
+              <Button variant="contained" color="secondary" style={{ color: "#111" }}>
                 Place Bid
-              </button>
-              <button
-                style={{
-                  backgroundColor: "transparent",
-                  color: "white",
-                  padding: "10px 20px",
-                  border: "1px solid white",
-                  cursor: "pointer",
-                }}
-              >
+              </Button>
+              <Button variant="contained" color="primary" style={{ color: "#fff" }}>
                 Check Car
-              </button>
+              </Button>
             </div>
           </div>
           <div
@@ -71,41 +65,126 @@ export default function Hero() {
               left: "50%",
               transform: "translateX(-50%)",
               zIndex: 1,
+              boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)",
             }}
           >
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
-              <div style={{ flex: "1 1 200px" }}>
-                <label style={{ fontWeight: "medium", marginBottom: "5px", display: "block" }}>
+              <FormControl fullWidth margin="normal" sx={{ flex: "1 1 45%" }}>
+                <InputLabel
+                  htmlFor="car-maker"
+                  shrink
+                  style={{ background: "white", padding: "0 5px" }}
+                >
                   Car Maker
-                </label>
-                <select style={{ width: "100%", padding: "10px" }}>
+                </InputLabel>
+                <TextField
+                  id="car-maker"
+                  name="carMaker"
+                  select
+                  SelectProps={{ native: true }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <CarIcon />
+                      </InputAdornment>
+                    ),
+                    style: {
+                      boxShadow: "inset 0 2px 4px rgba(0,0,0,0.1)",
+                    },
+                  }}
+                >
                   <option>Select Maker</option>
-                </select>
-              </div>
-              <div style={{ flex: "1 1 200px" }}>
-                <label style={{ fontWeight: "medium", marginBottom: "5px", display: "block" }}>
+                  <option value="mercedes">Mercedes-Benz</option>
+                  <option value="bmw">BMW</option>
+                  <option value="audi">Audi</option>
+                  <option value="toyota">Toyota</option>
+                </TextField>
+              </FormControl>
+              <FormControl fullWidth margin="normal" sx={{ flex: "1 1 45%" }}>
+                <InputLabel
+                  htmlFor="car-model"
+                  shrink
+                  style={{ background: "white", padding: "0 5px" }}
+                >
                   Car Model
-                </label>
-                <select style={{ width: "100%", padding: "10px" }}>
+                </InputLabel>
+                <TextField
+                  id="car-model"
+                  name="carModel"
+                  select
+                  SelectProps={{ native: true }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <ModelIcon />
+                      </InputAdornment>
+                    ),
+                    style: {
+                      boxShadow: "inset 0 2px 4px rgba(0,0,0,0.1)",
+                    },
+                  }}
+                >
                   <option>Select Model</option>
-                </select>
-              </div>
-              <div style={{ flex: "1 1 200px" }}>
-                <label style={{ fontWeight: "medium", marginBottom: "5px", display: "block" }}>
+                  <option value="amg">AMG GT-R</option>
+                  <option value="m5">M5</option>
+                  <option value="rs7">RS7</option>
+                  <option value="supra">Supra</option>
+                </TextField>
+              </FormControl>
+              <FormControl fullWidth margin="normal" sx={{ flex: "1 1 45%" }}>
+                <InputLabel htmlFor="body" shrink style={{ background: "white", padding: "0 5px" }}>
                   Body
-                </label>
-                <select style={{ width: "100%", padding: "10px" }}>
+                </InputLabel>
+                <TextField
+                  id="body"
+                  name="body"
+                  select
+                  SelectProps={{ native: true }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <BodyIcon />
+                      </InputAdornment>
+                    ),
+                    style: {
+                      boxShadow: "inset 0 2px 4px rgba(0,0,0,0.1)",
+                    },
+                  }}
+                >
                   <option>Select Body</option>
-                </select>
-              </div>
-              <div style={{ flex: "1 1 200px" }}>
-                <label style={{ fontWeight: "medium", marginBottom: "5px", display: "block" }}>
+                  <option value="sedan">Sedan</option>
+                  <option value="coupe">Coupe</option>
+                  <option value="suv">SUV</option>
+                  <option value="hatchback">Hatchback</option>
+                </TextField>
+              </FormControl>
+              <FormControl fullWidth margin="normal" sx={{ flex: "1 1 45%" }}>
+                <InputLabel htmlFor="fuel" shrink style={{ background: "white", padding: "0 5px" }}>
                   Fuel
-                </label>
-                <select style={{ width: "100%", padding: "10px" }}>
+                </InputLabel>
+                <TextField
+                  id="fuel"
+                  name="fuel"
+                  select
+                  SelectProps={{ native: true }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <FuelIcon />
+                      </InputAdornment>
+                    ),
+                    style: {
+                      boxShadow: "inset 0 2px 4px rgba(0,0,0,0.1)",
+                    },
+                  }}
+                >
                   <option>Select Fuel</option>
-                </select>
-              </div>
+                  <option value="petrol">Petrol</option>
+                  <option value="diesel">Diesel</option>
+                  <option value="electric">Electric</option>
+                  <option value="hybrid">Hybrid</option>
+                </TextField>
+              </FormControl>
             </div>
             <div
               style={{
@@ -126,19 +205,11 @@ export default function Hero() {
               >
                 + Advanced Search
               </button>
-              <button
-                style={{
-                  backgroundColor: "blue",
-                  color: "white",
-                  padding: "10px 20px",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
+              <Button type="submit" variant="contained" color="primary" style={{ color: "#fff" }}>
                 Search
-              </button>
+              </Button>
             </div>
-          </div>
+          </div>{" "}
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ export const fetchUserData = createAsyncThunk("user/fetchUserData", async () => 
       Authorization: `Bearer ${token}`,
     },
   });
+  console.log(response);
   return response.data;
 });
 
@@ -43,6 +44,7 @@ const userSlice = createSlice({
     logout: (state) => {
       state.user = null;
       cookies.remove("token");
+      cookies.remove("userType");
     },
   },
   extraReducers: (builder) => {

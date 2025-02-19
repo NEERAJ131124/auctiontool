@@ -42,6 +42,7 @@ import createCache from "@emotion/cache";
 // Soft UI Dashboard PRO React routes
 import routes from "routes";
 import dashboardRoutes from "dashboardRoutes";
+import adminRoutes from "adminRoutes";
 
 // Soft UI Dashboard PRO React contexts
 import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
@@ -60,8 +61,19 @@ import OtpLogin from "layouts/authentication/otp-login/OtpLogin";
 import IllustrationSignIn from "layouts/authentication/sign-in/illustration";
 import Illustration from "layouts/authentication/sign-up/illustration";
 import Home from "layouts/pages/home/Home";
+import ContactUs from "layouts/pages/contact/ContactUs";
+import AboutUs from "layouts/pages/about/AboutUs";
+import Error400 from "layouts/authentication/error/400";
+import Error401 from "layouts/authentication/error/401";
+import Error403 from "layouts/authentication/error/403";
+import Error502 from "layouts/authentication/error/502";
+import Error404 from "layouts/authentication/error/404";
+import Error500 from "layouts/authentication/error/500";
+import Cookies from "universal-cookie";
+import Cover from "layouts/authentication/sign-in/cover";
 
 export default function App() {
+  const cookies = new Cookies();
   const [controller, dispatch] = useSoftUIController();
   const { miniSidenav, direction, layout, openConfigurator, sidenavColor } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
@@ -84,7 +96,7 @@ export default function App() {
   };
 
   // Change the openConfigurator state
-  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
+  // const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   // Change the openConfigurator state
 
   // Setting the dir attribute for the body element
@@ -111,58 +123,62 @@ export default function App() {
       return null;
     });
 
-  const configsButton = (
-    <SoftBox
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      width="3.5rem"
-      height="3.5rem"
-      bgColor="white"
-      shadow="sm"
-      borderRadius="50%"
-      position="fixed"
-      right="2rem"
-      bottom="2rem"
-      zIndex={99}
-      color="dark"
-      sx={{ cursor: "pointer" }}
-      onClick={handleConfiguratorOpen}
-    >
-      <Icon fontSize="default" color="inherit">
-        settings
-      </Icon>
-    </SoftBox>
-  );
+  // const configsButton = (
+  //   <SoftBox
+  //     display="flex"
+  //     justifyContent="center"
+  //     alignItems="center"
+  //     width="3.5rem"
+  //     height="3.5rem"
+  //     bgColor="white"
+  //     shadow="sm"
+  //     borderRadius="50%"
+  //     position="fixed"
+  //     right="2rem"
+  //     bottom="2rem"
+  //     zIndex={99}
+  //     color="dark"
+  //     sx={{ cursor: "pointer" }}
+  //     onClick={handleConfiguratorOpen}
+  //   >
+  //     <Icon fontSize="default" color="inherit">
+  //       settings
+  //     </Icon>
+  //   </SoftBox>
+  // );
 
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        {layout === "dashboard" && (
-          <>
-            <Sidenav
-              color={sidenavColor}
-              brand={brand}
-              brandName="Auction Listings"
-              routes={dashboardRoutes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
-            />
-            <Configurator />
-            {configsButton}
-          </>
+        {cookies.get("token") && (
+          <Sidenav
+            color={sidenavColor}
+            brand={brand}
+            brandName="Auction Listings"
+            routes={cookies.get("userType") ? adminRoutes : dashboardRoutes}
+            onMouseEnter={handleOnMouseEnter}
+            onMouseLeave={handleOnMouseLeave}
+          />
         )}
         <Routes>
-          {getRoutes(dashboardRoutes)}
-          {/* <Route path="/" element={<Home />} /> */}
+          {getRoutes(cookies.get("userType") ? adminRoutes : dashboardRoutes)}
+          <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/authentication/error/400" element={<Error400 />} />
+          <Route path="/authentication/error/401" element={<Error401 />} />
+          <Route path="/authentication/error/403" element={<Error403 />} />
+          <Route path="/authentication/error/404" element={<Error404 />} />
+          <Route path="/authentication/error/500" element={<Error500 />} />
+          <Route path="/authentication/error/502" element={<Error502 />} />
           <Route path="/authentication/sign-up/success" element={<Success />} />
           <Route path="/authentication/sign-in" element={<IllustrationSignIn />} />
           <Route path="/authentication/reset-password" element={<ResetPassword />} />
           <Route path="/authentication/otp-login" element={<OtpLogin />} />
           <Route path="/authentication/sign-up" element={<Illustration />} />
-          {/* <Route path="/dashboard" element={<Dashboard />} /> */}
-          <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
+          <Route path="/admin/sign-in" element={<Cover />} />
+          <Route path="*" element={<Navigate to="/authentication/error/404" />} />
         </Routes>
       </ThemeProvider>
     </Provider>

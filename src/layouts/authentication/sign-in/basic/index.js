@@ -13,67 +13,38 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useEffect } from "react";
-import React from "react";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import axios from "axios";
-import Swal from "sweetalert2";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+// react-router-dom components
+import { Link } from "react-router-dom";
+
+// @mui material components
 import Card from "@mui/material/Card";
+import Switch from "@mui/material/Switch";
+
+// Soft UI Dashboard PRO React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
-import BasicLayout from "layouts/authentication/components/BasicLayout";
-import curved9 from "assets/images/curved-images/curved9.jpg";
-import Cookies from "universal-cookie";
 
-const validationSchema = yup.object({
-  email: yup.string().email("Enter a valid email").required("Email is required"),
-  password: yup
-    .string()
-    .min(8, "Password should be of minimum 8 characters length")
-    .required("Password is required"),
-});
+// Authentication layout components
+import BasicLayout from "layouts/authentication/components/BasicLayout";
+import Socials from "layouts/authentication/components/Socials";
+import Separator from "layouts/authentication/components/Separator";
+
+// Images
+import curved9 from "assets/images/curved-images/curved9.jpg";
 
 function Basic() {
-  const cookies = new Cookies();
-  const navigate = useNavigate();
+  const [rememberMe, setRememberMe] = useState(false);
 
-  useEffect(() => {
-    const token = cookies.get("token");
-    if (token) {
-      navigate("/dashboard");
-    }
-  }, [navigate, cookies]);
-
-  const handleSubmit = async (values) => {
-    try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, values);
-      Swal.fire("Success", "Signed in successfully", "success");
-      if (response.data.token) {
-        cookies.set("token", response.data.token, { path: "/", maxAge: 86400 });
-        navigate("/dashboard");
-      }
-    } catch (error) {
-      Swal.fire("Error", "Invalid credentials", "error");
-    }
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: handleSubmit,
-  });
+  const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   return (
     <BasicLayout
       title="Welcome!"
-      description="Access your auction account to bid, sell, and manage your listings with our secure sign-in portal."
+      description="Use these awesome forms to login or create new account in your project for free."
       image={curved9}
     >
       <Card>
@@ -82,74 +53,45 @@ function Basic() {
             Sign in
           </SoftTypography>
         </SoftBox>
-        <SoftBox pt={2} pb={3} px={3}>
-          <SoftBox component="form" role="form" onSubmit={formik.handleSubmit}>
+        <SoftBox mb={2}>
+          <Socials />
+        </SoftBox>
+        <SoftBox p={3}>
+          <SoftBox component="form" role="form">
             <SoftBox mb={2}>
-              <SoftInput
-                type="email"
-                placeholder="Email"
-                name="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-              />
-              {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+              <SoftInput type="email" placeholder="Email" />
             </SoftBox>
-            <SoftBox mb={2} position="relative">
-              <SoftInput
-                type="password"
-                placeholder="Password"
-                name="password"
-                onChange={formik.handleChange}
-                value={formik.values.password}
-              />
-              {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+            <SoftBox mb={2}>
+              <SoftInput type="password" placeholder="Password" />
+            </SoftBox>
+            <SoftBox display="flex" alignItems="center">
+              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
               <SoftTypography
-                component={Link}
-                to="/authentication/reset-password"
-                variant="caption"
-                color="dark"
-                fontWeight="bold"
-                textGradient
-                sx={{ position: "absolute", right: 0, bottom: -20 }}
+                variant="button"
+                fontWeight="regular"
+                onClick={handleSetRememberMe}
+                sx={{ cursor: "pointer", userSelect: "none" }}
               >
-                Forgot Password?
+                &nbsp;&nbsp;Remember me
               </SoftTypography>
             </SoftBox>
             <SoftBox mt={4} mb={1}>
-              <SoftButton variant="gradient" color="dark" fullWidth type="submit">
+              <SoftButton variant="gradient" color="info" fullWidth>
                 sign in
               </SoftButton>
             </SoftBox>
-          </SoftBox>
-          <SoftBox mt={3} textAlign="center">
-            <SoftTypography variant="button" color="text" fontWeight="regular">
-              Don&apos;t have an account?&nbsp;
-              <SoftTypography
+            <Separator />
+            <SoftBox mt={1} mb={3}>
+              <SoftButton
                 component={Link}
-                to="/authentication/sign-up"
-                variant="button"
+                to="/authentication/sign-up/basic"
+                variant="gradient"
                 color="dark"
-                fontWeight="bold"
-                textGradient
+                fullWidth
               >
-                Sign up
-              </SoftTypography>
-            </SoftTypography>
-          </SoftBox>
-          <SoftBox mt={3} textAlign="center">
-            <SoftTypography variant="button" color="text" fontWeight="regular">
-              Want to sign in using OTP?&nbsp;
-              <SoftTypography
-                component={Link}
-                to="/authentication/otp-login"
-                variant="button"
-                color="dark"
-                fontWeight="bold"
-                textGradient
-              >
-                Sign in using OTP
-              </SoftTypography>
-            </SoftTypography>
+                sign up
+              </SoftButton>
+            </SoftBox>
           </SoftBox>
         </SoftBox>
       </Card>

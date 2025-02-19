@@ -37,7 +37,7 @@ const validationSchema = yup.object({
 });
 
 function Illustration() {
-  const [rememberMe, setRememberMe] = useState(false);
+  // const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const cookies = new Cookies();
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ function Illustration() {
     }
   }, [navigate, cookies]);
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  // const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
   const handleSubmit = async (values) => {
     setLoading(true);
@@ -61,7 +61,25 @@ function Illustration() {
         navigate("/dashboard");
       }
     } catch (error) {
-      Swal.fire("Error", "Invalid credentials", "error");
+      console.log(error);
+      if (error.response) {
+        const { status, data } = error.response;
+        if (status === 400) {
+          Swal.fire("Error", `${data.message} 400` || "Bad Request", "error");
+        } else if (status === 401) {
+          Swal.fire("Error", `${data.message} 401` || "Unauthorized", "error");
+        } else if (status === 403) {
+          Swal.fire("Error", `${data.message} 403` || "Forbidden", "error");
+        } else if (status === 404) {
+          Swal.fire("Error", `${data.message} 404` || "Not Found", "error");
+        } else if (status === 500) {
+          Swal.fire("Error", `${data.message} 500` || "Server Error", "error");
+        } else {
+          Swal.fire("Error", `${data.message}` || "An error occurred", "error");
+        }
+      } else {
+        Swal.fire("Error", "An error occurred", "error");
+      }
     } finally {
       setLoading(false);
     }

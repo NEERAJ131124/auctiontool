@@ -3,6 +3,7 @@ import SoftTypography from "components/SoftTypography";
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
+import cardimg from "../../../../assets/images/card.jpg";
 
 const stats = [
   { number: "40K", label: "Registered Members" },
@@ -18,7 +19,7 @@ export default function Stats() {
         <Grid container spacing={3} mb={4}>
           {stats.map((stat, index) => (
             <Grid item xs={12} md={3} key={index}>
-              <Card sx={{ textAlign: "center", p: 3 }}>
+              <Card sx={{ textAlign: "center", p: 3, boxShadow: 3 }}>
                 <SoftTypography variant="h3" fontWeight="bold" mb={1}>
                   {stat.number}
                 </SoftTypography>
@@ -52,17 +53,17 @@ export default function Stats() {
               <li>Transmission: 8-Speed Automatic</li>
             </ul>
             <SoftBox mt={2}>
-              <Button variant="contained" color="primary" sx={{ mr: 2 }}>
+              <Button variant="contained" color="primary" sx={{ mr: 2 }} style={{ color: "#fff" }}>
                 Submit Entry
               </Button>
-              <Button variant="outlined" color="primary">
+              <Button variant="outlined" color="secondary" style={{ color: "#111" }}>
                 View Slot
               </Button>
             </SoftBox>
           </Grid>
           <Grid item xs={12} md={6}>
             <img
-              src="https://placehold.co/600x400"
+              src={cardimg}
               alt="Mercedes G-Class"
               style={{ width: "100%", borderRadius: "15px" }}
             />

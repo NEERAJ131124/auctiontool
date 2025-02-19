@@ -16,8 +16,14 @@ import ManageUsers from "layouts/pages/users/reports";
 import ManagePayments from "layouts/pages/users/new-user";
 import { Shop } from "@mui/icons-material";
 import Dashboard from "layouts/dashboards/default/Dashboard";
+import ContactUs from "layouts/pages/contact/ContactUs";
+import Cookies from "universal-cookie";
+// import ProfileManagement from "layouts/pages/profile/ProfileManagement";
+// import PasswordRecovery from "layouts/authentication/reset-password/basic/PasswordRecovery";
+// import UserRegistration from "layouts/authentication/sign-up/basic/UserRegistration";
+import UserManagement from "layouts/pages/user-management/UserManagement";
 
-const dashboardRoutes = [
+const userRoutes = [
   {
     type: "collapse",
     name: "dashboard",
@@ -26,16 +32,7 @@ const dashboardRoutes = [
     route: "/dashboard",
     component: <Dashboard />,
     noCollapse: true,
-    // collapse: [
-    //   {
-    //     name: "Default Dashboard",
-    //     key: "default-dashboard",
-    //     route: "/dashboard",
-    //     component: <Dashboard />,
-    //   },
-    // ],
   },
-
   {
     type: "collapse",
     name: "Auction",
@@ -56,38 +53,6 @@ const dashboardRoutes = [
       },
     ],
   },
-  //   {
-  //     type: "collapse",
-  //     name: "User Management",
-  //     key: "user-management",
-  //     icon: <Icon>person</Icon>,
-  //     collapse: [
-  //       {
-  //         name: "User Registration",
-  //         key: "user-registration",
-  //         route: "/authentication/sign-up/basic",
-  //         component: <UserProfile />,
-  //       },
-  //       {
-  //         name: "User Login",
-  //         key: "user-login",
-  //         route: "/authentication/sign-in/basic",
-  //         component: <UserProfile />,
-  //       },
-  //       {
-  //         name: "Password Recovery",
-  //         key: "password-recovery",
-  //         route: "/authentication/reset-password/basic",
-  //         component: <UserProfile />,
-  //       },
-  //       {
-  //         name: "Profile Management",
-  //         key: "profile-management",
-  //         route: "/pages/profile/profile-overview",
-  //         component: <UserProfile />,
-  //       },
-  //     ],
-  //   },
   {
     type: "collapse",
     name: "Payments",
@@ -108,7 +73,6 @@ const dashboardRoutes = [
       },
     ],
   },
-
   {
     type: "collapse",
     name: "Notifications",
@@ -147,32 +111,8 @@ const dashboardRoutes = [
     component: <UserProfile />,
     noCollapse: true,
   },
-  //   {
-  //     type: "collapse",
-  //     name: "User Management",
-  //     key: "admin-management",
-  //     icon: <Icon>admin_panel_settings</Icon>,
-  //     collapse: [
-  //       {
-  //         name: "Admin Dashboard",
-  //         key: "admin-dashboard",
-  //         route: "/pages/account/settings",
-  //         component: <AdminDashboard />,
-  //       },
-  //       {
-  //         name: "Manage Users",
-  //         key: "manage-users",
-  //         route: "/pages/users/reports",
-  //         component: <ManageUsers />,
-  //       },
-  //       {
-  //         name: "Manage Payments",
-  //         key: "manage-payments",
-  //         route: "/pages/users/new-user",
-  //         component: <ManagePayments />,
-  //       },
-  //     ],
-  //   },
 ];
+
+const dashboardRoutes = userRoutes;
 
 export default dashboardRoutes;
