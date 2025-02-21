@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, IconButton, Box, Checkbox, FormControlLabel, Typography } from "@mui/material";
+import { Grid, IconButton, Box, Typography } from "@mui/material";
 import ViewModuleIcon from "@mui/icons-material/ViewModule";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import SoftBox from "components/SoftBox";
@@ -55,8 +55,11 @@ function UserManagement() {
     setSelectedUser(null);
   };
 
-  const handleFilterChange = (event) => {
-    setFilter({ ...filter, [event.target.name]: event.target.checked });
+  const handleFilterChange = (status) => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      [status]: !prevFilter[status],
+    }));
   };
 
   const filteredUsers = users.filter((user) => {
@@ -85,6 +88,7 @@ function UserManagement() {
           users={filteredUsers.length > 0 ? filteredUsers : users}
           handleResetPassword={handleResetPassword}
           handleUpdateDetails={handleUpdateDetails}
+          handleEditSubscription={handleEditSubscription}
           handleViewDetails={handleViewDetails}
         />
       ) : (
@@ -92,7 +96,7 @@ function UserManagement() {
           users={filteredUsers.length > 0 ? filteredUsers : users}
           handleResetPassword={handleResetPassword}
           handleUpdateDetails={handleUpdateDetails}
-          // handleEditSubscription={handleEditSubscription}
+          handleEditSubscription={handleEditSubscription}
           handleViewDetails={handleViewDetails}
         />
       );
@@ -104,88 +108,75 @@ function UserManagement() {
     <DashboardLayout>
       <DashboardNavbar />
       <SoftBox py={3}>
-        <Box>
+        <Box mb={1} style={{ position: "relative" }}>
           {/* <Typography variant="h6" fontWeight="bold">
             Subscription Status Filters:
           </Typography> */}
-          <Box display="flex" alignItems="center" mt={1}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={filter.trialing}
-                  onChange={handleFilterChange}
-                  name="trialing"
-                  sx={{ color: "lightblue", "&.Mui-checked": { color: "lightblue" } }}
-                />
-              }
-              label="Trialing"
-              sx={{
-                borderRadius: 4,
-                padding: "4px",
-                paddingBottom: "6px",
-                margin: "auto",
-                boxShadow: 3,
-                backgroundColor: "lightblue",
-              }}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={filter.active}
-                  onChange={handleFilterChange}
-                  name="active"
-                  sx={{ color: "lightgreen", "&.Mui-checked": { color: "lightgreen" } }}
-                />
-              }
-              label="Active"
-              sx={{
-                borderRadius: 4,
-                padding: "4px",
-                paddingBottom: "6px",
-                margin: "auto",
-                boxShadow: 3,
-                backgroundColor: "lightgreen",
-              }}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={filter.paused}
-                  onChange={handleFilterChange}
-                  name="paused"
-                  sx={{ color: "lightyellow", "&.Mui-checked": { color: "lightyellow" } }}
-                />
-              }
-              label="Paused"
-              sx={{
-                borderRadius: 4,
-                padding: "4px",
-                paddingBottom: "6px",
-                margin: "auto",
-                boxShadow: 3,
-                backgroundColor: "lightyellow",
-              }}
-            />
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={filter.canceled}
-                  onChange={handleFilterChange}
-                  name="canceled"
-                  sx={{ color: "lightcoral", "&.Mui-checked": { color: "lightcoral" } }}
-                />
-              }
-              label="Canceled"
-              sx={{
-                // border: "1px solid #ccc",
-                borderRadius: 4,
-                padding: "4px",
-                paddingBottom: "6px",
-                margin: "auto",
-                boxShadow: 3,
-                backgroundColor: "lightcoral",
-              }}
-            />
+          <Box display="flex" alignItems="center" justifyContent="space-between">
+            <Box display="flex" alignItems="center">
+              <button
+                onClick={() => handleFilterChange("trialing")}
+                style={{
+                  color: filter.trialing ? "white" : "#2c7da0",
+                  borderColor: "#87ceeb",
+                  backgroundColor: filter.trialing ? "#87ceeb" : "transparent",
+                  border: "1px solid",
+                  padding: "8px 16px",
+                  marginRight: "8px",
+                  cursor: "pointer",
+                  borderRadius: "8px",
+                }}
+              >
+                Trialing
+              </button>
+              <button
+                onClick={() => handleFilterChange("active")}
+                style={{
+                  color: filter.active ? "white" : "lightgreen",
+                  borderColor: "lightgreen",
+                  backgroundColor: filter.active ? "lightgreen" : "transparent",
+                  border: "1px solid",
+                  padding: "8px 16px",
+                  marginRight: "8px",
+                  cursor: "pointer",
+                  borderRadius: "8px",
+                }}
+              >
+                Active
+              </button>
+              <button
+                onClick={() => handleFilterChange("paused")}
+                style={{
+                  color: filter.paused ? "#999" : "#222",
+                  borderColor: "#999",
+                  backgroundColor: filter.paused ? "lightyellow" : "transparent",
+                  border: "1px solid",
+                  padding: "8px 16px",
+                  marginRight: "8px",
+                  cursor: "pointer",
+                  borderRadius: "8px",
+                }}
+              >
+                Paused
+              </button>
+              <button
+                onClick={() => handleFilterChange("canceled")}
+                style={{
+                  color: filter.canceled ? "white" : "lightcoral",
+                  borderColor: "lightcoral",
+                  backgroundColor: filter.canceled ? "lightcoral" : "transparent",
+                  border: "1px solid",
+                  padding: "8px 16px",
+                  cursor: "pointer",
+                  borderRadius: "8px",
+                }}
+              >
+                Canceled
+              </button>
+            </Box>
+            <IconButton onClick={() => setView(view === "card" ? "table" : "card")}>
+              {view === "card" ? <ViewListIcon /> : <ViewModuleIcon />}
+            </IconButton>
           </Box>
         </Box>
         <Grid container justifyContent="space-between">
@@ -197,11 +188,6 @@ function UserManagement() {
             >
               Generate Report
             </Button> */}
-          </Grid>
-          <Grid item>
-            <IconButton onClick={() => setView(view === "card" ? "table" : "card")}>
-              {view === "card" ? <ViewListIcon /> : <ViewModuleIcon />}
-            </IconButton>
           </Grid>
         </Grid>
         {content}

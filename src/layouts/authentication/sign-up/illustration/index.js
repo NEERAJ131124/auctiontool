@@ -87,7 +87,7 @@ function SignUpForm() {
         });
 
         const data = await response.json();
-
+        console.log(data);
         if (response.ok) {
           const stripe = await stripePromise;
           const { error } = await stripe.redirectToCheckout({
@@ -99,8 +99,8 @@ function SignUpForm() {
             Swal.fire("Error", `Error: ${error.message}`, "error");
           }
         } else {
-          console.error("Error:", data.error);
-          Swal.fire("Error", `Error: ${data.error}`, "error");
+          console.error("Error:", data.message);
+          Swal.fire("Error", `Error: ${data.message}`, "error");
         }
       } catch (error) {
         console.error("Error:", error);

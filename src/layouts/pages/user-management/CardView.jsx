@@ -44,7 +44,7 @@ function CardView({ users, handleUpdateDetails, handleViewDetails }) {
       case "active":
         return "lightgreen";
       case "paused":
-        return "lightyellow";
+        return "darkgray";
       case "canceled":
         return "lightcoral";
       default:
@@ -53,96 +53,84 @@ function CardView({ users, handleUpdateDetails, handleViewDetails }) {
   };
 
   return (
-    <>
-      <Grid container spacing={3}>
-        {users.map((user) => (
-          <Grid item xs={12} md={6} lg={4} key={user._id}>
-            <Card
-              sx={{
-                boxShadow: 3,
-                backgroundColor: getCardBackgroundColor(user.subscriptionStatus),
-              }}
-            >
-              <SoftBox p={2} textAlign="center">
-                <Avatar
-                  sx={{ width: 100, height: 100, margin: "0 auto", mb: 2 }}
-                  src={user.profilePicture || ""}
-                >
-                  <PersonIcon sx={{ fontSize: 50 }} />
-                </Avatar>
-                <SoftTypography variant="h5" fontWeight="bold">
-                  {user.name}
-                </SoftTypography>
-                <Typography variant="body2" color="textSecondary">
-                  {user.email}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" mt={1}>
-                  Subscription: {user.subscriptionStatus || "unknown"}
-                </Typography>
-                {/* <SoftBox mt={2}>
-                  <SoftButton
-                    variant="contained"
-                    color="primary"
-                    size="small"
-                    onClick={() => handleOpenResetPassword(user)}
-                    startIcon={<LockResetIcon />}
+    <Grid container spacing={3}>
+      {users.map((user) => (
+        <Grid item xs={12} md={6} lg={4} key={user._id}>
+          <Card
+            sx={{
+              boxShadow: 3,
+              backgroundColor: getCardBackgroundColor(user.subscriptionStatus),
+            }}
+          >
+            <SoftBox p={2}>
+              <Grid container spacing={2}>
+                <Grid item xs={4} textAlign="center">
+                  <Avatar
+                    sx={{ width: 100, height: 100, margin: "0 auto" }}
+                    src={user.profilePicture || ""}
                   >
-                    Reset Password
-                  </SoftButton>
-                </SoftBox> */}
-                {/* <SoftBox mt={2}>
-                  <SoftButton
-                    variant="contained"
-                    color="secondary"
-                    size="small"
-                    onClick={() => handleUpdateDetails(user._id)}
-                    startIcon={<EditIcon />}
-                  >
-                    Update Details
-                  </SoftButton>
-                </SoftBox> */}
-                <SoftBox mt={2}>
+                    <PersonIcon sx={{ fontSize: 50 }} />
+                  </Avatar>
+                </Grid>
+                <Grid item xs={8}>
+                  <SoftTypography variant="h5" fontWeight="bold">
+                    {user.name}
+                  </SoftTypography>
+                  <Typography variant="body2" color="textSecondary">
+                    {user.email}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    Subscription: {user.subscriptionStatus || "unknown"}
+                  </Typography>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} mt={2}>
+                <Grid item xs={6}>
                   <SoftButton
                     variant="contained"
                     color="info"
                     size="small"
                     onClick={() => handleOpenEditSubscription(user)}
                     startIcon={<SubscriptionsIcon />}
+                    fullWidth
+                    sx={{ fontSize: "0.7rem" }}
                   >
                     Edit Subscription
                   </SoftButton>
-                </SoftBox>
-                <SoftBox mt={2}>
+                </Grid>
+                <Grid item xs={6}>
                   <SoftButton
                     variant="contained"
                     color="default"
                     size="small"
                     onClick={() => handleViewDetails(user)}
                     startIcon={<VisibilityIcon />}
+                    fullWidth
+                    sx={{ fontSize: "0.7rem" }}
                   >
                     View Details
                   </SoftButton>
-                </SoftBox>
-              </SoftBox>
-            </Card>
-          </Grid>
-        ))}
-        {selectedUser && (
-          <>
-            <ResetPasswordModal
-              open={openResetPassword}
-              handleClose={handleCloseResetPassword}
-              userId={selectedUser._id}
-            />
-            <EditSubscriptionModal
-              open={openEditSubscription}
-              handleClose={handleCloseEditSubscription}
-              user={selectedUser}
-            />
-          </>
-        )}
-      </Grid>
-    </>
+                </Grid>
+              </Grid>
+            </SoftBox>
+          </Card>
+        </Grid>
+      ))}
+      {selectedUser && (
+        <>
+          <ResetPasswordModal
+            open={openResetPassword}
+            handleClose={handleCloseResetPassword}
+            userId={selectedUser._id}
+          />
+          <EditSubscriptionModal
+            open={openEditSubscription}
+            handleClose={handleCloseEditSubscription}
+            user={selectedUser}
+          />
+        </>
+      )}
+    </Grid>
   );
 }
 

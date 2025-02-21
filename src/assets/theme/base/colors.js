@@ -56,7 +56,7 @@ const colors = {
 
   info: {
     main: "#111",
-    focus: "#3acaeb",
+    focus: "#96a2b8",
   },
 
   success: {

@@ -5,6 +5,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import axios from "axios";
 import Swal from "sweetalert2";
 import Cookies from "universal-cookie";
+import { useDispatch } from "react-redux";
+import { fetchUsers } from "slices/userManagementSlice";
 
 const cookies = new Cookies();
 
@@ -22,8 +24,26 @@ const style = {
 
 function EditSubscriptionModal({ open, handleClose, user }) {
   const [loading, setLoading] = useState(false);
-
+  const dispatch = useDispatch();
+  console.log(user);
   const handleSubscriptionAction = async (action) => {
+    console.log(user.subscriptions);
+    if (action === "cancel") {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "Once the user cancellation is done, it can't be started again without adding the payment method. Instead pause the subscription!!!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Yes, cancel it!",
+      });
+
+      if (!result.isConfirmed) {
+        return;
+      }
+    }
+
     setLoading(true);
     try {
       const res = await axios.post(
@@ -37,6 +57,7 @@ function EditSubscriptionModal({ open, handleClose, user }) {
       );
       console.log(res);
       Swal.fire("Success", `Subscription ${action} successfully`, "success");
+      dispatch(fetchUsers());
       handleClose();
     } catch (error) {
       console.log(error);
@@ -47,7 +68,6 @@ function EditSubscriptionModal({ open, handleClose, user }) {
   };
 
   const renderActionButton = () => {
-    console.log(user);
     const subscriptionStatus = user.subscriptionStatus || "unknown";
     switch (subscriptionStatus) {
       case "active":
