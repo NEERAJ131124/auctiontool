@@ -40,8 +40,11 @@ import rankingsListData from "layouts/dashboards/crm/data/rankingsListData";
 import calendarEventsData from "layouts/dashboards/crm/data/calendarEventsData";
 
 // Images
-import ivancik from "assets/images/ivancik.jpg";
-import kalVisualsSquare from "assets/images/kal-visuals-square.jpg";
+// import ivancik from "assets/images/ivancik.jpg";
+// import kalVisualsSquare from "assets/images/kal-visuals-square.jpg";
+
+const ivancik = "https://placehold.co/600x400";
+const kalVisualsSquare = "https://placehold.co/600x400";
 
 function CRM() {
   const { visitorsChart, incomeChart } = miniGradientLineChartData;

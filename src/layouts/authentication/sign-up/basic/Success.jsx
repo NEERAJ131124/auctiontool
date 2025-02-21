@@ -25,21 +25,21 @@ const Success = () => {
 
             cookies.set("token", response.data.token, { path: "/", maxAge: 86400 });
             setTimeout(() => {
-              navigate("/dashboard");
+              // navigate("/dashboard");
             }, 2000);
           } else {
             Swal.fire("Error", "Payment not successful", "error");
             setTimeout(() => {
-              navigate("/authentication/sign-up/basic");
+              // navigate("/authentication/sign-up/basic");
             }, 2000);
           }
         } catch (error) {
           Swal.fire("Error", "Payment not successful", "error");
-          navigate("/authentication/sign-up");
+          // navigate("/authentication/sign-up");
         }
       } else {
         Swal.fire("Error", "No session ID found", "error");
-        navigate("/authentication/sign-up");
+        // navigate("/authentication/sign-up");
       }
     };
 

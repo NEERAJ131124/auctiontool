@@ -23,10 +23,15 @@ import ReviewCell from "layouts/ecommerce/products/product-page/components/Revie
 import DefaultCell from "layouts/ecommerce/products/product-page/components/DefaultCell";
 
 // Images
-import blackChair from "assets/images/ecommerce/black-chair.jpeg";
-import chairPink from "assets/images/ecommerce/chair-pink.jpeg";
-import chairSteel from "assets/images/ecommerce/chair-steel.jpeg";
-import chairWood from "assets/images/ecommerce/chair-wood.jpeg";
+// import blackChair from "assets/images/ecommerce/black-chair.jpeg";
+// import chairPink from "assets/images/ecommerce/chair-pink.jpeg";
+// import chairSteel from "assets/images/ecommerce/chair-steel.jpeg";
+// import chairWood from "assets/images/ecommerce/chair-wood.jpeg";
+
+const blackChair = "https://placehold.co/600x400";
+const chairPink = "https://placehold.co/600x400";
+const chairSteel = "https://placehold.co/600x400";
+const chairWood = "https://placehold.co/600x400";
 
 const dataTableData = {
   columns: [

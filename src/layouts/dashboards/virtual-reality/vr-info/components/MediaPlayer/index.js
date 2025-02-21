@@ -24,7 +24,8 @@ import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
 
 // Images
-import curved1 from "assets/images/curved-images/curved1.jpg";
+// import curved1 from "assets/images/curved-images/curved1.jpg";
+const curved1 = "https://placehold.co/600x400";
 
 function MediaPlayer() {
   const mediaPlayerButtonStyles = ({ functions: { pxToRem } }) => ({

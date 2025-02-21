@@ -22,21 +22,37 @@ import ProductCell from "layouts/ecommerce/products/products-list/components/Pro
 import ActionCell from "layouts/ecommerce/products/products-list/components/ActionCell";
 
 // Images
-import adidasHoodie from "assets/images/ecommerce/adidas-hoodie.jpeg";
-import macBookPro from "assets/images/ecommerce/macbook-pro.jpeg";
-import metroChair from "assets/images/ecommerce/metro-chair.jpeg";
-import alchimiaChair from "assets/images/ecommerce/alchimia-chair.jpeg";
-import fendiCoat from "assets/images/ecommerce/fendi-coat.jpeg";
-import offWhiteJacket from "assets/images/ecommerce/off-white-jacket.jpeg";
-import yohjiYamamoto from "assets/images/ecommerce/yohji-yamamoto.jpeg";
-import mcqueenShirt from "assets/images/ecommerce/mcqueen-shirt.jpeg";
-import yellowChair from "assets/images/ecommerce/yellow-chair.jpeg";
-import heronTshirt from "assets/images/ecommerce/heron-tshirt.jpeg";
-import livingChair from "assets/images/ecommerce/living-chair.jpeg";
-import orangeSofa from "assets/images/ecommerce/orange-sofa.jpeg";
-import burberry from "assets/images/ecommerce/burberry.jpeg";
-import dgSkirt from "assets/images/ecommerce/d&g-skirt.jpeg";
-import undercover from "assets/images/ecommerce/undercover.jpeg";
+// import adidasHoodie from "assets/images/ecommerce/adidas-hoodie.jpeg";
+// import macBookPro from "assets/images/ecommerce/macbook-pro.jpeg";
+// import metroChair from "assets/images/ecommerce/metro-chair.jpeg";
+// import alchimiaChair from "assets/images/ecommerce/alchimia-chair.jpeg";
+// import fendiCoat from "assets/images/ecommerce/fendi-coat.jpeg";
+// import offWhiteJacket from "assets/images/ecommerce/off-white-jacket.jpeg";
+// import yohjiYamamoto from "assets/images/ecommerce/yohji-yamamoto.jpeg";
+// import mcqueenShirt from "assets/images/ecommerce/mcqueen-shirt.jpeg";
+// import yellowChair from "assets/images/ecommerce/yellow-chair.jpeg";
+// import heronTshirt from "assets/images/ecommerce/heron-tshirt.jpeg";
+// import livingChair from "assets/images/ecommerce/living-chair.jpeg";
+// import orangeSofa from "assets/images/ecommerce/orange-sofa.jpeg";
+// import burberry from "assets/images/ecommerce/burberry.jpeg";
+// import dgSkirt from "assets/images/ecommerce/d&g-skirt.jpeg";
+// import undercover from "assets/images/ecommerce/undercover.jpeg";
+
+const adidasHoodie = "https://placehold.co/600x400";
+const macBookPro = "https://placehold.co/600x400";
+const metroChair = "https://placehold.co/600x400";
+const alchimiaChair = "https://placehold.co/600x400";
+const fendiCoat = "https://placehold.co/600x400";
+const offWhiteJacket = "https://placehold.co/600x400";
+const yohjiYamamoto = "https://placehold.co/600x400";
+const mcqueenShirt = "https://placehold.co/600x400";
+const yellowChair = "https://placehold.co/600x400";
+const heronTshirt = "https://placehold.co/600x400";
+const livingChair = "https://placehold.co/600x400";
+const orangeSofa = "https://placehold.co/600x400";
+const burberry = "https://placehold.co/600x400";
+const dgSkirt = "https://placehold.co/600x400";
+const undercover = "https://placehold.co/600x400";
 
 // Badges
 const outOfStock = (

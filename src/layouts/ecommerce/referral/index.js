@@ -39,7 +39,8 @@ import OutlinedCard from "layouts/ecommerce/referral/components/OutlinedCard";
 import dataTableData from "layouts/ecommerce/referral/data/dataTableData";
 
 // Images
-import officeDark from "assets/images/office-dark.jpg";
+// import officeDark from "assets/images/office-dark.jpg";
+const officeDark = "https://placehold.co/600x400";
 
 const image1 =
   "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/window-desk.jpg";

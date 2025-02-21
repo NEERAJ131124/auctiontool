@@ -14,11 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Images
-import kal from "assets/images/kal-visuals-square.jpg";
-import marie from "assets/images/marie.jpg";
-import ivana from "assets/images/ivana-square.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+// import kal from "assets/images/kal-visuals-square.jpg";
+// import marie from "assets/images/marie.jpg";
+// import ivana from "assets/images/ivana-square.jpg";
+// import team3 from "assets/images/team-3.jpg";
+// import team4 from "assets/images/team-4.jpg";
+const team3 = "https://placehold.co/600x400";
+const team4 = "https://placehold.co/600x400";
+const kal = "https://placehold.co/600x400";
+const marie = "https://placehold.co/600x400";
+const ivana = "https://placehold.co/600x400";
 
 const profilesListData = [
   {

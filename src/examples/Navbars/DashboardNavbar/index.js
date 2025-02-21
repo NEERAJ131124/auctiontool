@@ -59,8 +59,11 @@ import {
 } from "context";
 
 // Images
-import team2 from "assets/images/team-2.jpg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+// import team2 from "assets/images/team-2.jpg";
+// import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+
+const team2 = "https://placehold.co/600x400";
+const logoSpotify = "https://placehold.co/600x400";
 
 function DashboardNavbar({ absolute = false, light = false, isMini = false }) {
   const cookies = new Cookies();

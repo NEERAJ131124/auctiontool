@@ -42,13 +42,13 @@ import PlatformSettings from "layouts/pages/profile/profile-overview/components/
 import profilesListData from "layouts/pages/profile/profile-overview/data/profilesListData";
 
 // Images
-import homeDecor1 from "assets/images/home-decor-1.jpg";
-import homeDecor2 from "assets/images/home-decor-2.jpg";
-import homeDecor3 from "assets/images/home-decor-3.jpg";
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+// import "https://placehold.co/600x400" from "assets/images/home-decor-1.jpg";
+// import "https://placehold.co/600x400" from "assets/images/home-decor-2.jpg";
+// import "https://placehold.co/600x400" from "assets/images/home-decor-3.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"1.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"2.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"3.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"4.jpg";
 
 function Overview() {
   return (
@@ -112,7 +112,7 @@ function Overview() {
             <Grid container spacing={3}>
               <Grid item xs={12} md={6} xl={3}>
                 <DefaultProjectCard
-                  image={homeDecor1}
+                  image={"https://placehold.co/600x400"}
                   label="project #2"
                   title="modern"
                   description="As Uber works through a huge amount of internal management turmoil."
@@ -123,16 +123,16 @@ function Overview() {
                     label: "view project",
                   }}
                   authors={[
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
+                    { image: "https://placehold.co/600x400", name: "Elena Morison" },
+                    { image: "https://placehold.co/600x400", name: "Ryan Milly" },
+                    { image: "https://placehold.co/600x400", name: "Nick Daniel" },
+                    { image: "https://placehold.co/600x400", name: "Peterson" },
                   ]}
                 />
               </Grid>
               <Grid item xs={12} md={6} xl={3}>
                 <DefaultProjectCard
-                  image={homeDecor2}
+                  image={"https://placehold.co/600x400"}
                   label="project #1"
                   title="scandinavian"
                   description="Music is something that every person has his or her own specific opinion about."
@@ -143,16 +143,16 @@ function Overview() {
                     label: "view project",
                   }}
                   authors={[
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
+                    { image: "https://placehold.co/600x400", name: "Nick Daniel" },
+                    { image: "https://placehold.co/600x400", name: "Peterson" },
+                    { image: "https://placehold.co/600x400", name: "Elena Morison" },
+                    { image: "https://placehold.co/600x400", name: "Ryan Milly" },
                   ]}
                 />
               </Grid>
               <Grid item xs={12} md={6} xl={3}>
                 <DefaultProjectCard
-                  image={homeDecor3}
+                  image={"https://placehold.co/600x400"}
                   label="project #3"
                   title="minimalist"
                   description="Different people have different taste, and various types of music."
@@ -163,10 +163,10 @@ function Overview() {
                     label: "view project",
                   }}
                   authors={[
-                    { image: team4, name: "Peterson" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team1, name: "Elena Morison" },
+                    { image: "https://placehold.co/600x400", name: "Peterson" },
+                    { image: "https://placehold.co/600x400", name: "Nick Daniel" },
+                    { image: "https://placehold.co/600x400", name: "Ryan Milly" },
+                    { image: "https://placehold.co/600x400", name: "Elena Morison" },
                   ]}
                 />
               </Grid>

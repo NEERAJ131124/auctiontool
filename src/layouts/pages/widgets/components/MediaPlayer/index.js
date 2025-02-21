@@ -23,7 +23,7 @@ import SoftTypography from "components/SoftTypography";
 import SoftButton from "components/SoftButton";
 
 // Images
-import curved1 from "assets/images/curved-images/curved1.jpg";
+// import curved1 from "assets/images/curved-images/curved1.jpg";
 
 function MediaPlayer() {
   const mediaPlayerButtonStyles = ({ functions: { pxToRem } }) => ({
@@ -40,7 +40,7 @@ function MediaPlayer() {
         backgroundImage: `${linearGradient(
           rgba(gradients.dark.main, 0.85),
           rgba(gradients.dark.state, 0.85)
-        )}, url(${curved1})`,
+        )}, url(${"curved1"})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       })}

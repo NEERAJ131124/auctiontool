@@ -27,8 +27,11 @@ import SoftAvatar from "components/SoftAvatar";
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
-import curved8 from "assets/images/curved-images/curved8.jpg";
-import team4 from "assets/images/team-4.jpg";
+// import curved8 from "assets/images/curved-images/curved8.jpg";
+// import team4 from "assets/images/team-4.jpg";
+
+const curved8 = "https://placehold.co/600x400";
+const team4 = "https://placehold.co/600x400";
 
 function Basic() {
   return (

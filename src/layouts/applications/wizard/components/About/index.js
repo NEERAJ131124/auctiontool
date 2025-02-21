@@ -27,7 +27,8 @@ import SoftButton from "components/SoftButton";
 import FormField from "layouts/applications/wizard/components/FormField";
 
 // Images
-import team2 from "assets/images/team-2.jpg";
+// import team2 from "assets/images/team-2.jpg";
+const team2 = "https://placehold.co/600x400";
 
 function About() {
   return (

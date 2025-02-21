@@ -6,6 +6,38 @@ import Card from "@mui/material/Card";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import Footer from "examples/Footer";
 import pageRoutes from "page.routes";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import aboutlotties from "../../../assets/images/lottie/about.lottie";
+import mission from "../../../assets/images/lottie/mission.lottie";
+import HowItWorks from "../home/components/HowItWorks";
+import TestimonialsSlider from "components/TestimonialsSlider";
+
+const testimonials = [
+  {
+    quote:
+      "Auction Listing made the car buying process so easy and enjoyable. I found the perfect car and won the auction without any hassle.",
+    name: "Alex Turner",
+    location: "California, CA",
+  },
+  {
+    quote:
+      "The variety of vehicles available on Auction Listing is impressive. I was able to find exactly what I was looking for at a great price.",
+    name: "Sarah Johnson",
+    location: "New York, NY",
+  },
+  {
+    quote:
+      "I highly recommend Auction Listing to anyone looking to buy a car through an auction. The process is straightforward and the customer service is excellent.",
+    name: "Michael Brown",
+    location: "Austin, TX",
+  },
+  {
+    quote:
+      "The variety of vehicles available on Auction Listing is impressive. I was able to find exactly what I was looking for at a great price.",
+    name: "Sarah Johnson",
+    location: "New York, NY",
+  },
+];
 
 function AboutUs() {
   return (
@@ -17,11 +49,7 @@ function AboutUs() {
           <SoftBox container mx="auto" px={2} sx={{ px: { xs: 2, md: 10 } }}>
             <Grid container spacing={3} alignItems="center">
               <Grid item xs={12} md={6}>
-                <img
-                  src="https://placehold.co/600x400"
-                  alt="About Auction Listing"
-                  style={{ width: "100%", borderRadius: "15px" }}
-                />
+                <DotLottieReact src={aboutlotties} loop autoplay />
               </Grid>
               <Grid item xs={12} md={6}>
                 <SoftTypography variant="h4" fontWeight="bold" mb={2}>
@@ -54,11 +82,7 @@ function AboutUs() {
                 </SoftTypography>
               </Grid>
               <Grid item xs={12} md={6}>
-                <img
-                  src="https://placehold.co/600x400"
-                  alt="Our Mission"
-                  style={{ width: "100%", borderRadius: "15px" }}
-                />
+                <DotLottieReact src={mission} loop autoplay />
               </Grid>
             </Grid>
           </SoftBox>
@@ -66,58 +90,7 @@ function AboutUs() {
 
         {/* Section 3: How It Works */}
         <SoftBox py={6} bgcolor="grey.100">
-          <SoftBox container mx="auto" px={2} sx={{ px: { xs: 2, md: 10 } }}>
-            <SoftTypography variant="h4" fontWeight="bold" mb={4} textAlign="center">
-              How It Works
-            </SoftTypography>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={4}>
-                <Card sx={{ textAlign: "center", p: 3 }}>
-                  <img
-                    src="https://placehold.co/100x100"
-                    alt="Step 1"
-                    style={{ width: 64, height: 64, margin: "0 auto 16px" }}
-                  />
-                  <SoftTypography variant="h6" fontWeight="bold" mb={1}>
-                    Step 1: Register
-                  </SoftTypography>
-                  <SoftTypography variant="body2" color="textSecondary">
-                    Create an account to start bidding on your favorite vehicles.
-                  </SoftTypography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Card sx={{ textAlign: "center", p: 3 }}>
-                  <img
-                    src="https://placehold.co/100x100"
-                    alt="Step 2"
-                    style={{ width: 64, height: 64, margin: "0 auto 16px" }}
-                  />
-                  <SoftTypography variant="h6" fontWeight="bold" mb={1}>
-                    Step 2: Browse
-                  </SoftTypography>
-                  <SoftTypography variant="body2" color="textSecondary">
-                    Explore our extensive inventory of vehicles and find the perfect one for you.
-                  </SoftTypography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Card sx={{ textAlign: "center", p: 3 }}>
-                  <img
-                    src="https://placehold.co/100x100"
-                    alt="Step 3"
-                    style={{ width: 64, height: 64, margin: "0 auto 16px" }}
-                  />
-                  <SoftTypography variant="h6" fontWeight="bold" mb={1}>
-                    Step 3: Bid
-                  </SoftTypography>
-                  <SoftTypography variant="body2" color="textSecondary">
-                    Place your bids and compete with other buyers to win your dream car.
-                  </SoftTypography>
-                </Card>
-              </Grid>
-            </Grid>
-          </SoftBox>
+          <HowItWorks />
         </SoftBox>
 
         {/* Section 4: Customer Testimonials */}
@@ -126,51 +99,7 @@ function AboutUs() {
             <SoftTypography variant="h4" fontWeight="bold" mb={4} textAlign="center">
               Customer Testimonials
             </SoftTypography>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={4}>
-                <Card sx={{ textAlign: "center", p: 3 }}>
-                  <SoftTypography variant="body1" color="textSecondary" mb={2} fontStyle="italic">
-                    &quot;Auction Listing made the car buying process so easy and enjoyable. I found
-                    the perfect car and won the auction without any hassle.&quot;
-                  </SoftTypography>
-                  <SoftTypography variant="h6" fontWeight="medium">
-                    Alex Turner
-                  </SoftTypography>
-                  <SoftTypography variant="body2" color="textSecondary">
-                    California, CA
-                  </SoftTypography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Card sx={{ textAlign: "center", p: 3 }}>
-                  <SoftTypography variant="body1" color="textSecondary" mb={2} fontStyle="italic">
-                    &quot;The variety of vehicles available on Auction Listing is impressive. I was
-                    able to find exactly what I was looking for at a great price.&quot;
-                  </SoftTypography>
-                  <SoftTypography variant="h6" fontWeight="medium">
-                    Sarah Johnson
-                  </SoftTypography>
-                  <SoftTypography variant="body2" color="textSecondary">
-                    New York, NY
-                  </SoftTypography>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Card sx={{ textAlign: "center", p: 3 }}>
-                  <SoftTypography variant="body1" color="textSecondary" mb={2} fontStyle="italic">
-                    &quot;I highly recommend Auction Listing to anyone looking to buy a car through
-                    an auction. The process is straightforward and the customer service is
-                    excellent.&quot;
-                  </SoftTypography>
-                  <SoftTypography variant="h6" fontWeight="medium">
-                    Michael Brown
-                  </SoftTypography>
-                  <SoftTypography variant="body2" color="textSecondary">
-                    Austin, TX
-                  </SoftTypography>
-                </Card>
-              </Grid>
-            </Grid>
+            <TestimonialsSlider testimonials={testimonials} />
           </SoftBox>
         </SoftBox>
 

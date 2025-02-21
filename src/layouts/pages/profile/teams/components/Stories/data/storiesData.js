@@ -14,71 +14,71 @@ Coded by www.creative-tim.com
 */
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
-import maria from "assets/images/marie.jpg";
-import bruceMars from "assets/images/bruce-mars.jpg";
-import ivana from "assets/images/ivana-squares.jpg";
-import kal from "assets/images/kal-visuals-square.jpg";
-import ivanaSquare from "assets/images/ivana-square.jpg";
-import ivancik from "assets/images/ivancik.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"1.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"2.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"3.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"4.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"5.jpg";
+// import maria from "assets/images/marie.jpg";
+// import bruceMars from "assets/images/bruce-mars.jpg";
+// import ivana from "assets/images/ivana-squares.jpg";
+// import kal from "assets/images/kal-visuals-square.jpg";
+// import ivanaSquare from "assets/images/ivana-square.jpg";
+// import ivancik from "assets/images/ivancik.jpg";
 
 const storiesData = [
   {
-    image: team1,
+    image: "https://placehold.co/600x400",
     name: "Abbie W",
     color: "info",
   },
   {
-    image: team2,
+    image: "https://placehold.co/600x400",
     name: "Boris U",
     color: "info",
   },
   {
-    image: team3,
+    image: "https://placehold.co/600x400",
     name: "Kay R",
     color: "info",
   },
   {
-    image: team4,
+    image: "https://placehold.co/600x400",
     name: "Tom M",
     color: "info",
   },
   {
-    image: team5,
+    image: "https://placehold.co/600x400",
     name: "Nicole N",
     color: "info",
   },
   {
-    image: maria,
+    image: "https://placehold.co/600x400",
     name: "Maria P",
     color: "info",
   },
   {
-    image: bruceMars,
+    image: "https://placehold.co/600x400",
     name: "Burce M",
     color: "info",
   },
   {
-    image: ivana,
+    image: "https://placehold.co/600x400",
     name: "Sandra A",
     color: "secondary",
   },
   {
-    image: kal,
+    image: "https://placehold.co/600x400",
     name: "Katty L",
     color: "secondary",
   },
   {
-    image: ivanaSquare,
+    image: "https://placehold.co/600x400",
     name: "Emma Q",
     color: "secondary",
   },
   {
-    image: ivancik,
+    image: "https://placehold.co/600x400",
     name: "Tao Q",
     color: "secondary",
   },

@@ -33,7 +33,8 @@ import colors from "assets/theme/base/colors";
 import BaseLayout from "layouts/pages/account/components/BaseLayout";
 
 // Images
-import logoCT from "assets/images/logo-ct.png";
+// import logoCT from "assets/images/logo-ct.png";
+const logoCT = "https://placehold.co/600x400";
 
 function Invoice() {
   const { borderWidth } = borders;

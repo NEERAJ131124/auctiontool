@@ -25,11 +25,17 @@ import Grid from "@mui/material/Grid";
 import SoftBox from "components/SoftBox";
 
 // Images
-import image1 from "assets/images/ecommerce/wooden-table.jpeg";
-import image2 from "assets/images/ecommerce/chair-pink.jpeg";
-import image3 from "assets/images/ecommerce/black-chair.jpeg";
-import image4 from "assets/images/ecommerce/chair-steel.jpeg";
-import image5 from "assets/images/ecommerce/chair-wood.jpeg";
+// import image1 from "assets/images/ecommerce/wooden-table.jpeg";
+// import image2 from "assets/images/ecommerce/chair-pink.jpeg";
+// import image3 from "assets/images/ecommerce/black-chair.jpeg";
+// import image4 from "assets/images/ecommerce/chair-steel.jpeg";
+// import image5 from "assets/images/ecommerce/chair-wood.jpeg";
+
+const image1 = "https://placehold.co/600x400";
+const image2 = "https://placehold.co/600x400";
+const image3 = "https://placehold.co/600x400";
+const image4 = "https://placehold.co/600x400";
+const image5 = "https://placehold.co/600x400";
 
 function ProductImages() {
   const [currentImage, setCurrentImage] = useState(image1);

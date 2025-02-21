@@ -24,11 +24,17 @@ import SoftAvatar from "components/SoftAvatar";
 import SoftButton from "components/SoftButton";
 
 // Image
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
+// import team1 from "assets/images/team-1.jpg";
+// import team2 from "assets/images/team-2.jpg";
+// import team3 from "assets/images/team-3.jpg";
+// import team4 from "assets/images/team-4.jpg";
+// import team5 from "assets/images/team-5.jpg";
+
+const team1 = "https://placehold.co/600x400";
+const team2 = "https://placehold.co/600x400";
+const team3 = "https://placehold.co/600x400";
+const team4 = "https://placehold.co/600x400";
+const team5 = "https://placehold.co/600x400";
 
 function Header() {
   const avatarStyles = {

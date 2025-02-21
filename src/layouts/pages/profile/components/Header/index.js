@@ -39,8 +39,10 @@ import Settings from "examples/Icons/Settings";
 import breakpoints from "assets/theme/base/breakpoints";
 
 // Images
-import burceMars from "assets/images/bruce-mars.jpg";
-import curved0 from "assets/images/curved-images/curved0.jpg";
+// import burceMars from "assets/images/bruce-mars.jpg";
+// import curved0 from "assets/images/curved-images/curved0.jpg";
+const burceMars = "https://placehold.co/600x400";
+const curved0 = "https://placehold.co/600x400";
 
 function Header() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");

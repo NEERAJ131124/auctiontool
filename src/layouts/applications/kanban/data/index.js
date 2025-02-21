@@ -20,14 +20,23 @@ import { v4 as uuidv4 } from "uuid";
 import Card from "layouts/applications/kanban/components/Card";
 
 // Images
-import officeDark from "assets/images/office-dark.jpg";
-import meeting from "assets/images/meeting.jpg";
-import homeDecore from "assets/images/home-decor-1.jpg";
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
+// import officeDark from "assets/images/office-dark.jpg";
+// import meeting from "assets/images/meeting.jpg";
+// import homeDecore from "assets/images/home-decor-1.jpg";
+// import team1 from "assets/images/team-1.jpg";
+// import team2 from "assets/images/team-2.jpg";
+// import team3 from "assets/images/team-3.jpg";
+// import team4 from "assets/images/team-4.jpg";
+// import team5 from "assets/images/team-5.jpg";
+
+const officeDark = "https://placehold.co/600x400";
+const meeting = "https://placehold.co/600x400";
+const homeDecore = "https://placehold.co/600x400";
+const team1 = "https://placehold.co/600x400";
+const team2 = "https://placehold.co/600x400";
+const team3 = "https://placehold.co/600x400";
+const team4 = "https://placehold.co/600x400";
+const team5 = "https://placehold.co/600x400";
 
 const boards = {
   columns: [

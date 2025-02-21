@@ -19,11 +19,17 @@ import RefundsCell from "layouts/ecommerce/overview/components/RefundsCell";
 import DefaultCell from "layouts/ecommerce/overview/components/DefaultCell";
 
 // Images
-import nikeV22 from "assets/images/ecommerce/blue-shoe.jpeg";
-import businessKit from "assets/images/ecommerce/black-mug.jpeg";
-import blackChair from "assets/images/ecommerce/black-chair.jpeg";
-import wirelessCharger from "assets/images/ecommerce/bang-sound.jpeg";
-import tripKit from "assets/images/ecommerce/photo-tools.jpeg";
+// import nikeV22 from "assets/images/ecommerce/blue-shoe.jpeg";
+// import businessKit from "assets/images/ecommerce/black-mug.jpeg";
+// import blackChair from "assets/images/ecommerce/black-chair.jpeg";
+// import wirelessCharger from "assets/images/ecommerce/bang-sound.jpeg";
+// import tripKit from "assets/images/ecommerce/photo-tools.jpeg";
+
+const nikeV22 = "https://placehold.co/600x400";
+const businessKit = "https://placehold.co/600x400";
+const blackChair = "https://placehold.co/600x400";
+const wirelessCharger = "https://placehold.co/600x400";
+const tripKit = "https://placehold.co/600x400";
 
 const dataTableData = {
   columns: [

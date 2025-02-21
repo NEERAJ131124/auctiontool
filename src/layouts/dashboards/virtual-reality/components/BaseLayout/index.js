@@ -44,7 +44,8 @@ import {
 } from "layouts/dashboards/virtual-reality/components/BaseLayout/styles";
 
 // Images
-import brand from "assets/images/logo-ct.png";
+// import brand from "assets/images/logo-ct.png";
+const brand = "https://placehold.co/600x400";
 
 function BaseLayout({ children }) {
   const [controller, dispatch] = useSoftUIController();

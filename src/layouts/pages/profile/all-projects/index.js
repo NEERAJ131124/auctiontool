@@ -34,16 +34,22 @@ import PlaceholderCard from "examples/Cards/PlaceholderCard";
 import Header from "layouts/pages/profile/components/Header";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
+// import team1 from "assets/images/team-1.jpg";
+// import team2 from "assets/images/team-2.jpg";
+// import team3 from "assets/images/team-3.jpg";
+// import team4 from "assets/images/team-4.jpg";
+// import team5 from "assets/images/team-5.jpg";
 import logoSlack from "assets/images/small-logos/logo-slack.svg";
 import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
 import logoXD from "assets/images/small-logos/logo-xd.svg";
 import logoAsana from "assets/images/small-logos/logo-asana.svg";
 import logoInvision from "assets/images/small-logos/logo-invision.svg";
+
+const team1 = "https://placehold.co/600x400";
+const team2 = "https://placehold.co/600x400";
+const team3 = "https://placehold.co/600x400";
+const team4 = "https://placehold.co/600x400";
+const team5 = "https://placehold.co/600x400";
 
 function AllProjects() {
   // ComplexProjectCard dropdown menu state

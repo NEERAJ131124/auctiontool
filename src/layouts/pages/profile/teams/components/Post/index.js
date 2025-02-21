@@ -32,15 +32,17 @@ import SoftInput from "components/SoftInput";
 import borders from "assets/theme/base/borders";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
-import bruceMars from "assets/images/bruce-mars.jpg";
-import workSpace from "assets/images/work-space.jpeg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"1.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"2.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"4.jpg";
+// import "https://placehold.co/600x400" from "assets/images/"https://placehold.co/600x400"5.jpg";
+// import bruceMars from "assets/images/bruce-mars.jpg";
+// import workSpace from "assets/images/work-space.jpeg";
 
 function Post() {
   const { borderWidth, borderColor } = borders;
+  const bruceMars = "https://placehold.co/600x400";
+  const workSpace = "https://placehold.co/600x400";
 
   const [comments] = useState([
     {
@@ -51,7 +53,7 @@ function Post() {
       share: 2,
     },
     {
-      image: team5,
+      image: "https://placehold.co/600x400",
       name: "jessica stones",
       text: "Society has put up so many boundaries, so many limitations on what’s right and wrong that it’s almost impossible to get a pure thought out. It’s like a little kid, a little boy.",
       like: 10,
@@ -106,7 +108,7 @@ function Post() {
         py={2}
         px={3}
       >
-        <SoftAvatar src={team4} alt="profile-image" variant="rounded" />
+        <SoftAvatar src={"https://placehold.co/600x400"} alt="profile-image" variant="rounded" />
         <SoftBox mx={2} lineHeight={1}>
           <SoftTypography component="a" href="#" variant="button" fontWeight="regular">
             John Snow
@@ -167,9 +169,9 @@ function Post() {
                 alignItems="center"
                 width="100%"
               >
-                <SoftAvatar src={team5} alt="person 1" size="xs" />
-                <SoftAvatar src={team2} alt="person 2" size="xs" />
-                <SoftAvatar src={team1} alt="person 3" size="xs" />
+                <SoftAvatar src={"https://placehold.co/600x400"} alt="person 1" size="xs" />
+                <SoftAvatar src={"https://placehold.co/600x400"} alt="person 2" size="xs" />
+                <SoftAvatar src={"https://placehold.co/600x400"} alt="person 3" size="xs" />
                 <SoftBox pl={1}>
                   <SoftTypography variant="button" color="text" fontWeight="medium">
                     and 30+ more
@@ -182,7 +184,7 @@ function Post() {
           {renderComments}
           <SoftBox display="flex" alignItems="center" mt={3}>
             <SoftBox flexShrink={0} mr={2}>
-              <SoftAvatar src={team4} alt="profile picture" />
+              <SoftAvatar src={"https://placehold.co/600x400"} alt="profile picture" />
             </SoftBox>
             <SoftBox flexGrow={1}>
               <SoftInput placeholder="Write your comment" multiline />

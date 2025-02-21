@@ -26,7 +26,8 @@ import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
 
 // Images
-import burceMars from "assets/images/bruce-mars.jpg";
+// import burceMars from "assets/images/bruce-mars.jpg";
+const burceMars = "https://placehold.co/600x400";
 
 function Header() {
   const [visible, setVisible] = useState(true);

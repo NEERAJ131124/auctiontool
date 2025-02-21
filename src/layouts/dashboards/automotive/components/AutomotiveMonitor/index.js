@@ -32,8 +32,10 @@ import SoftInput from "components/SoftInput";
 import SoftAvatar from "components/SoftAvatar";
 
 // Images
-import curved10 from "assets/images/curved-images/curved10.jpg";
-import spotifyLogo from "assets/images/small-logos/logo-spotify.svg";
+// import curved10 from "assets/images/curved-images/curved10.jpg";
+// import spotifyLogo from "assets/images/small-logos/logo-spotify.svg";
+const curved10 = "https://placehold.co/600x400";
+const spotifyLogo = "https://placehold.co/600x400";
 
 function AutomotiveMonitor() {
   return (

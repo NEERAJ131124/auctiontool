@@ -37,7 +37,7 @@ import progressLineChartData from "layouts/pages/projects/general/data/progressL
 import progressDoughnutChartData from "layouts/pages/projects/general/data/progressDoughnutChartData";
 
 // Images
-import team3 from "assets/images/team-3.jpg";
+// import team3 from "assets/images/team-3.jpg";
 
 function General() {
   return (
@@ -108,7 +108,7 @@ function General() {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <AnnouncementCard
-                  by={{ image: team3, name: "lucas prila", date: "2h ago" }}
+                  by={{ image: "team3", name: "lucas prila", date: "2h ago" }}
                   badge={{ color: "info", label: "recommendation" }}
                   title="I need a Ruby developer for my new website."
                   description="The website was initially built in PHP, I need a professional ruby programmer to shift it."

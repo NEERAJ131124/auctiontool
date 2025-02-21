@@ -35,9 +35,12 @@ import breakpoints from "assets/theme/base/breakpoints";
 import CameraView from "layouts/dashboards/smart-home/components/CameraView";
 
 // Images
-import camera1 from "assets/images/bg-smart-home-1.jpg";
-import camera2 from "assets/images/bg-smart-home-2.jpg";
-import camera3 from "assets/images/home-decor-3.jpg";
+// import camera1 from "assets/images/bg-smart-home-1.jpg";
+// import camera2 from "assets/images/bg-smart-home-2.jpg";
+// import camera3 from "assets/images/home-decor-3.jpg";
+const camera1 = "https://placehold.co/600x400";
+const camera2 = "https://placehold.co/600x400";
+const camera3 = "https://placehold.co/600x400";
 
 function Cameras() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");

@@ -48,7 +48,8 @@ import adminRoutes from "adminRoutes";
 import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
 // Images
-import brand from "assets/images/logo-ct.png";
+// import brand from "assets/images/logo-ct.png";
+const brand = "https://placehold.co/600x400";
 import Success from "layouts/authentication/sign-up/basic/Success";
 import Dashboard from "layouts/dashboards/default/Dashboard";
 

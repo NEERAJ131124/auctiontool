@@ -38,8 +38,10 @@ import MediaPlayer from "layouts/dashboards/virtual-reality/vr-info/components/M
 import Messages from "layouts/dashboards/virtual-reality/vr-info/components/Messages";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import sunCloud from "assets/images/small-logos/icon-sun-cloud.png";
+// import team1 from "assets/images/team-1.jpg";
+// import sunCloud from "assets/images/small-logos/icon-sun-cloud.png";
+const team1 = "https://placehold.co/600x400";
+const sunCloud = "https://placehold.co/600x400";
 
 function VRInfo() {
   const { d1, h2, fontWeightMedium } = typography;

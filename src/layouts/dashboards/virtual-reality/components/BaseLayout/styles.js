@@ -14,7 +14,8 @@ Coded by www.creative-tim.com
 */
 
 // Images
-import vrBg from "assets/images/vr-bg.jpg";
+// import vrBg from "assets/images/vr-bg.jpg";
+const vrBg = "https://placehold.co/600x400";
 
 function baseLayout({ functions, breakpoints }) {
   const { pxToRem } = functions;

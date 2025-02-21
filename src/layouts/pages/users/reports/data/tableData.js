@@ -18,9 +18,9 @@ import SoftBox from "components/SoftBox";
 import SoftBadgeDot from "components/SoftBadgeDot";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
+// import team1 from "assets/images/team-1.jpg";
+// import team2 from "assets/images/team-2.jpg";
+// import team3 from "assets/images/team-3.jpg";
 
 const tableData = {
   columns: [
@@ -34,7 +34,7 @@ const tableData = {
 
   rows: [
     {
-      name: [team2, "John Micheal"],
+      name: ["team2", "John Micheal"],
       function: "Manager",
       review: (
         <SoftBox ml={-1.325}>
@@ -46,7 +46,7 @@ const tableData = {
       id: "43431",
     },
     {
-      name: [team3, "Alexa Liras"],
+      name: ["team3", "Alexa Liras"],
       function: "Programator",
       review: (
         <SoftBox ml={-1.325}>
@@ -58,7 +58,7 @@ const tableData = {
       id: "93021",
     },
     {
-      name: [team1, "Laurent Perrier"],
+      name: ["team1", "Laurent Perrier"],
       function: "Executive",
       review: (
         <SoftBox ml={-1.325}>
@@ -70,7 +70,7 @@ const tableData = {
       id: "10392",
     },
     {
-      name: [team3, "Michael Levi"],
+      name: ["team3", "Michael Levi"],
       function: "Backend Developer",
       review: (
         <SoftBox ml={-1.325}>
@@ -82,7 +82,7 @@ const tableData = {
       id: "34002",
     },
     {
-      name: [team2, "Richard Gran"],
+      name: ["team2", "Richard Gran"],
       function: "Manager",
       review: (
         <SoftBox ml={-1.325}>
@@ -94,7 +94,7 @@ const tableData = {
       id: "91879",
     },
     {
-      name: [team3, "Miriam Eric"],
+      name: ["team3", "Miriam Eric"],
       function: "Programtor",
       review: (
         <SoftBox ml={-1.325}>
